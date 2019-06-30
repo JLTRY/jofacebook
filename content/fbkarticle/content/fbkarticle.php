@@ -65,7 +65,7 @@ class plgContentFbkArticle extends JPlugin
         if (!$this->params->get('enabled', 1)) {
             return true;
         }
- 		if ( JString::strpos( $row->text, '{fbk' ) === false ) {
+ 		if ( strpos( $row->text, '{fbk' ) === false ) {
             return true;
 		}
 		preg_match_all(PF_REGEX_FBK_PATTERN, $row->text, $matches);
