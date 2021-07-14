@@ -9,7 +9,7 @@
 	<authorUrl>www.jltryoen.fr</authorUrl>
 	<version>1.0</version>
 	<description>FacebookArticle  plugin, use it with {fbkarticle site=xxx article=yyy}</description>
-    <files>
+	<files>
 		<filename plugin="fbkarticle">fbkarticle.php</filename>
 	</files>
 </extension>
