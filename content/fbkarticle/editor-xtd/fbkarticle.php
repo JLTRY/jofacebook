@@ -15,14 +15,14 @@ class plgButtonFbkArticle extends JPlugin {
 			if (!txt) return;
 			jInsertEditorText('{fbkarticle id='+id+';article='+txt+'}', editor);
 		}";
-		$params = $this->params;	
+		$params = $this->params;
 		
 		$id = $params->get('id','?');
 		
 		$doc = JFactory::getDocument();
 		$doc->addScriptDeclaration($js);
 		
-		$button = new JObject;		
+		$button = new JObject;
 		$button->modal = false;
 		$button->class = 'btn';
 		$button->link = '#';
