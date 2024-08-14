@@ -11,6 +11,9 @@
 // Check to ensure this file is included in Joomla!
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.plugin.plugin' );
+use Joomla\CMS\Plugin\CMSPlugin as JPlugin;
+use Joomla\CMS\Factory as JFactory;
+use Joomla\CMS\Uri\Uri as JUri;
 define('PF_REGEX_FBK_PATTERN', "#{fbkarticle (.*?)}#s");
 define('PF_REGEX_FBKLIKE_PATTERN', "#{fbklike}#s");
 

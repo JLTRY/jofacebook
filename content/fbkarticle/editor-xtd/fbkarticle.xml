@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.4" type="plugin" method="upgrade" group="editors-xtd">
+<extension type="plugin" method="upgrade" group="editors-xtd">
 	<name>Editor - FBKArticle</name>
 	<author>TRYOEN Jean-Luc</author>
 	<creationDate>November 2016</creationDate>
