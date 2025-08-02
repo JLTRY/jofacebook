@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" version="4.0" method="upgrade">
+	<name>PLG_CONTENT_JOFBKPOST</name>
+	<version>1.0.0</version>
+	<author>Jean-Luc TRYOEN</author>
+	<creationDate>August 11, 2025</creationDate>
+	<copyright>Copyright (C) 2025 Jean-Luc TRYOEN. All rights reserved.</copyright>
+	<license>http://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>www.jltryoen.fr</authorUrl>
+	<description>PLG_CONTENT_JOFBKPOST_DESCRIPTION</description>
+	<namespace path="src">JLTRY\Plugin\Content\JOFbkPost</namespace>
+	<files>
+		<folder plugin="jofbkpost">services</folder>
+		<folder>src</folder>
+		<folder>language</folder>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="appid" 
+					type="text" 
+					default="" 
+					label="id for facebook" 
+					size="32"
+					maxlength="20"/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

@@ -2,7 +2,7 @@
     FB.init({
       appId      : '1200678046618226',
       xfbml      : true,
-      version    : 'v2.6'
+      version    : 'v23.0'
     });
   };
 

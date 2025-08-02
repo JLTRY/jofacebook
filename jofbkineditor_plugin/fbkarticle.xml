@@ -2,7 +2,7 @@
 <extension type="plugin" method="upgrade" group="editors-xtd">
 	<name>Editor - FBKArticle</name>
 	<author>TRYOEN Jean-Luc</author>
-	<creationDate>November 2016</creationDate>
+	<creationDate>August 11, 2025</creationDate>
 	<copyright>(c) JL TRYOEN, 2016. All rights reserved.</copyright>
 	<license>GPL</license>
 	<authorEmail>Email</authorEmail>
