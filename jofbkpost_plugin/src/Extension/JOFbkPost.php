@@ -17,6 +17,7 @@ use Joomla\CMS\Uri\Uri;
 use Joomla\Event\SubscriberInterface;
 use Joomla\CMS\Event\Content\ContentPrepareEvent;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Component\ComponentHelper;
 
 // phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
@@ -33,12 +34,12 @@ define('PF_REGEX_FBK_LIKE_PATTERN', "#{fbklike}#s");
 class JOFbkPost extends CMSPlugin implements SubscriberInterface
 {
 
-	public static function getSubscribedEvents(): array
-	{
-		return [
-			'onContentPrepare'  => 'onPrepareRow'
-		];
-	}
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            'onContentPrepare'  => 'onPrepareRow'
+        ];
+    }
 
     function addScripts($appid){
         /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
@@ -74,9 +75,13 @@ class JOFbkPost extends CMSPlugin implements SubscriberInterface
         if (strpos( $article->text, '{fbk' ) === false) {
             return true;
         }
-        
-        $appid  = $this->params->get('appid', -1);
+        $params = ComponentHelper::getParams('com_jofacebook');
+        $appid = $params->get('appid');
+        if($appid == -1) {
+            $appid  = $this->params->get('appid', -1);
+        }
         if ($appid == -1) {
+            
             $this->getApplication()->enqueueMessage(Text::_('PLG_JO_FACEBOOK_UNKNOW_APPID'), 'error');
             return;
         }

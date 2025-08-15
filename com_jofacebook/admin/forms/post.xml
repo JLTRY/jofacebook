@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form
+	addruleprefix="JCB\Component\Jofacebook\Administrator\Rule"
+	addfieldprefix="JCB\Component\Jofacebook\Administrator\Field"
+>
+	<config>
+		<inlinehelp button="show"/>
+	</config>
+	<fieldset name="details">
+        <!-- Default Fields. -->
+        <!-- Id Field. Type: Text (joomla) -->
+        <field
+            name="id"
+            type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
+            description ="JGLOBAL_FIELD_ID_DESC" size="10" default="0"
+            readonly="true"
+        />
+        <!-- Date Created Field. Type: Calendar (joomla) -->
+        <field
+            name="created"
+            type="calendar"
+            label="COM_JOFACEBOOK_POST_CREATED_DATE_LABEL"
+            description="COM_JOFACEBOOK_POST_CREATED_DATE_DESC"
+            size="22"
+            format="%Y-%m-%d %H:%M:%S"
+            filter="user_utc"
+        />
+        <!-- User Created Field. Type: User (joomla) -->
+        <field
+            name="created_by"
+            type="user"
+            label="COM_JOFACEBOOK_POST_CREATED_BY_LABEL"
+            description="COM_JOFACEBOOK_POST_CREATED_BY_DESC"
+        />
+        <!-- Published Field. Type: List (joomla) -->
+        <field name="published" type="list" label="JSTATUS"
+            description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
+            filter="intval" size="1" default="1" >
+            <option value="1">
+                JPUBLISHED</option>
+            <option value="0">
+                JUNPUBLISHED</option>
+            <option value="2">
+                JARCHIVED</option>
+            <option value="-2">
+                JTRASHED</option>
+        </field>
+        <!-- Date Modified Field. Type: Calendar (joomla) -->
+        <field name="modified" type="calendar" class="readonly"
+            label="COM_JOFACEBOOK_POST_MODIFIED_DATE_LABEL" description="COM_JOFACEBOOK_POST_MODIFIED_DATE_DESC"
+            size="22" readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+        <!-- User Modified Field. Type: User (joomla) -->
+        <field name="modified_by" type="user"
+            label="COM_JOFACEBOOK_POST_MODIFIED_BY_LABEL"
+            description="COM_JOFACEBOOK_POST_MODIFIED_BY_DESC"
+            class="readonly"
+            readonly="true"
+            filter="unset"
+        />
+        <!-- Access Field. Type: Accesslevel (joomla) -->
+        <field name="access"
+            type="accesslevel"
+            label="JFIELD_ACCESS_LABEL"
+            description="JFIELD_ACCESS_DESC"
+            default="1"
+            required="false"
+        />
+        <!-- Ordering Field. Type: Numbers (joomla) -->
+        <field
+            name="ordering"
+            type="number"
+            class="inputbox validate-ordering"
+            label="COM_JOFACEBOOK_POST_ORDERING_LABEL"
+            description=""
+            default="0"
+            size="6"
+            required="false"
+        />
+        <!-- Version Field. Type: Text (joomla) -->
+        <field
+            name="version"
+            type="text"
+            class="readonly"
+            label="COM_JOFACEBOOK_POST_VERSION_LABEL"
+            description="COM_JOFACEBOOK_POST_VERSION_DESC"
+            size="6"
+            default="1"
+            readonly="true"
+            filter="unset"
+        />
+        <!-- Dynamic Fields. -->
+        <!-- Profile Field. Type: Text. (joomla) -->
+        <field
+            type="text"
+            name="profile"
+            label="COM_JOFACEBOOK_POST_PROFILE_LABEL"
+            size="10"
+            maxlength="50"
+            default=""
+            class="text_area"
+            readonly="false"
+            disabled="false"
+            filter="STRING"
+            hint="COM_JOFACEBOOK_POST_PROFILE_HINT"
+            autocomplete="on"
+        />
+        <!-- Post Field. Type: Text. (joomla) -->
+        <field
+            type="text"
+            name="post"
+            label="COM_JOFACEBOOK_POST_POST_LABEL"
+            size="10"
+            maxlength="50"
+            default=""
+            class="text_area"
+            readonly="false"
+            disabled="false"
+            filter="STRING"
+            hint="COM_JOFACEBOOK_POST_POST_HINT"
+            autocomplete="on"
+        />
+        <!-- Category Field. Type: Category. (joomla) -->
+        <field
+            type="category"
+            name="category"
+            label="COM_JOFACEBOOK_POST_CATEGORY_LABEL"
+            extension="com_content"
+            show_root="true"
+            default=""
+            class="inputbox"
+            published="1"
+            multiple="false"
+        />
+        <!-- Description Field. Type: Text. (joomla) -->
+        <field
+            type="text"
+            name="description"
+            label="COM_JOFACEBOOK_POST_DESCRIPTION_LABEL"
+            size="32"
+            maxlength="64"
+            default="Some text"
+            description="COM_JOFACEBOOK_POST_DESCRIPTION_DESCRIPTION"
+            class="text_area"
+            readonly="false"
+            disabled="false"
+            required="false"
+            filter="STRING"
+            message="COM_JOFACEBOOK_POST_DESCRIPTION_MESSAGE"
+            hint="COM_JOFACEBOOK_POST_DESCRIPTION_HINT"
+            autocomplete="on"
+        />
+        <!-- Note_one Field. Type: Note. A None Database Field. (joomla) -->
+        <field type="note" name="note_one" label="COM_JOFACEBOOK_POST_NOTE_ONE_LABEL" heading="h4" class="alert note_one" close="true" />
+        <!-- Title Field. Type: Sql. (joomla) -->
+        <field
+            type="sql"
+            name="title"
+            label="COM_JOFACEBOOK_POST_TITLE_LABEL"
+            query="SELECT id, concat( description, ' (', created, ')') AS title FROM #__jofacebook_post"
+            default="0"
+            key_field="id"
+            value_field="title"
+        />
+    </fieldset>
+
+	<!-- Access Control Fields. -->
+    <fieldset name="accesscontrol">
+        <!-- Asset Id Field. Type: Hidden (joomla) -->
+        <field
+            name="asset_id"
+            type="hidden"
+            filter="unset"
+        />
+        <!-- Rules Field. Type: Rules (joomla) -->
+        <field
+            name="rules"
+            type="rules"
+            label="Permissions in relation to this post"
+            translate_label="false"
+            filter="rules"
+            validate="rules"
+            class="inputbox"
+            component="com_jofacebook"
+            section="post"
+        />
+    </fieldset>
+</form>
