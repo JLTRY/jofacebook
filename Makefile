@@ -2,6 +2,8 @@ VERSION = "1.0.0"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
 PKG=pkg_jofacebook
 ZIPFILE = $(PKG)-$(VERSION2).zip
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+mkfile_dir := $(dir $(mkfile_path))
 
 
 # Only set DATE if you need to force the date.  
@@ -10,8 +12,9 @@ ZIPFILE = $(PKG)-$(VERSION2).zip
 
 all: parts $(ZIPFILE) fixsha
 
-INSTALLS = jofbkpost_plugin
-#	   jofbkineditor_plugin
+INSTALLS = jofbkpost_plugin \
+	   jofbkineditor_plugin \
+	   com_jofacebook
 
 EXTRAS = 
 
@@ -52,6 +55,9 @@ fixsha:
 
 fixcopyrights:
 	@find . \( -name '*.php' -o -name '*.ini' -o -name '*.xml' \) -exec ./fixcopyrights.sh {} \;
+
+untabify:
+	@find . -name '*.php' -exec $(mkfile_dir)/replacetabs.sh {} \;
 
 
 

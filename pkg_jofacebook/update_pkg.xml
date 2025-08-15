@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updates>
 	<update>
-		<name>Attachments</name>
-		<description>Attachments</description>
-		<element>pkg_attachments</element>
+		<name>JOFacebook</name>
+		<description>JO's Facebook package</description>
+		<element>pkg_jofacebook</element>
 		<type>package</type>
 		<client>site</client>
 		<version>1.0.0</version>
-		<infourl title="Attachments">https://github.com/jmcameron/attachments/</infourl>
+		<infourl title="JOFacebook">https://github.com/JLTRY/jofacebook/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/jmcameron/attachments/releases/download/v1.0.0/attachments-1.0.0.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/JLTRY/jofacebook/releases/download/v1.0.0/pkg_jofacebook-1.0.0.zip</downloadurl>
 		</downloads>
 		<tags>
 			<tag>Stable</tag>
 		</tags>
-		<maintainer>Jonathan M. Cameron</maintainer>
-		<maintainerurl>https://github.com/jmcameron/attachments</maintainerurl>
+		<maintainer>JL TRYOEN</maintainer>
+		<maintainerurl>https://github.com/JLTRY/jofacebook</maintainerurl>
 		<php_minimum>8.0</php_minimum>
 		<targetplatform name="joomla" version="(4\.[01234]|5\.[0123])"/>
-		<sha256>AEF6AC314E81A4040E4A887FD6062DD88E464A193244617F427CBFA28DCBBCEC</sha256>
-		<sha384>90607B0A55B2B04C686EDC486D865FF8B9ED2B15DBCAA067DA1770B26F58AC9EABA4C53CF0B3DC811C1BDF8DD9D3632C</sha384>
-		<sha512>FF05884826082D6F288C61648042293A4C8C37B353E992C6E2F368B32AAEDD64FE57880A6601DC6ACFF90B98F40043B4F8F5C6F603CEDC60B3F9C75B5E5027D0</sha512>
+		<sha256>A6084421CF46FD75D71EA55BB74956CB7954EE97D8FADDC57148D624D059BAAF</sha256>
+		<sha384>459E31D3757000A7D54D2E165E760B9AEF226658A0B87701170C8FA7271AC26492CF2E2A2DB8666E8108BE258C10C25D</sha384>
+		<sha512>15F4DF67A5C725FA67B0597D2C150C6AE2AB16A0CD816A2CBBEFE2C75CC8989C15E78BDE984D4CEDF7E61627D3775E9B4F4103326ABB7D518E8A892993828175</sha512>
 	</update>
 </updates>
