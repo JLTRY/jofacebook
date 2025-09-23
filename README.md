@@ -1,4 +1,4 @@
-# com_jofacebook 1.0.0
+# jofacebook 1.0.0
 
 ## Quick Start
 
@@ -9,6 +9,7 @@ Download <a href="https://github.com/JLTRY/jofacebook/releases/latest" target="_
 Joomla 5.0+ 
 
 ## Features
+See https://www.jltryoen.fr/extensions-joomla/plugins/autres/152-facebook-article
 
 The package includes a component (helper), and 2 plugins
 - component_jofacebook

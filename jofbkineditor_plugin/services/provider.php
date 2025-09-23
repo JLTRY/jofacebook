@@ -44,7 +44,6 @@ return new class () implements ServiceProviderInterface {
             $container->set(
                 PluginInterface::class,
                 function (Container $container) {
-    
                     $config = (array) PluginHelper::getPlugin('editors-xtd', 'jofbkpost');
                     $subject = $container->get(DispatcherInterface::class);
                     $app = Factory::getApplication();
@@ -52,7 +51,7 @@ return new class () implements ServiceProviderInterface {
                     $plugin->setApplication($app);
                     // Show an error message if the plugin is not available
                     $lang = Factory::getApplication()->getLanguage();
-                    $lang->load('plg_editor_jofbkpost', JPATH_PLUGINS . '/editors-xtd/jofbkpost');
+                    $lang->load('plg_editors-xtd_jofbkpost', JPATH_PLUGINS . '/editors-xtd/jofbkpost');
                     return $plugin;
                 }
             );

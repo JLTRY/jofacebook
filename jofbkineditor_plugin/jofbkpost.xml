@@ -10,6 +10,7 @@
 	<version>1.0.0</version>
 	<description>PLG_EDITOR_JOFBKPOST_DESCRIPTION</description>
 	<namespace path="src">JLTRY\Plugin\EditorsXtd\JOFbkPost</namespace>
+	<scriptfile>install.jofbkpost.php</scriptfile>
 	<files>
 		<folder plugin="jofbkpost">services</folder>
 		<folder>src</folder>
