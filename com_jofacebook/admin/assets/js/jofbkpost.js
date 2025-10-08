@@ -2,8 +2,8 @@
 				JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.3
-	@build			15th August, 2025
+	@version		1.0.4
+	@build			8th October, 2025
 	@created		12th August, 2025
 	@package		JOFacebook
 	@subpackage		jofbkpost.js
@@ -22,42 +22,44 @@
 /***[JCBGUI.custom_admin_view.javascript_file.1.$$$$]***/
 function insertFacebookPost($, editorName) {
 	let editor = parent.Joomla.editors.instances[editorName];
-       if (editor) {
-	var adminform = document.getElementById("adminForm");
-	var Data = new FormData(adminform);
-	editor.replaceSelection("{fbkpost profile=" + Data.getAll("jform[profile]") + ";post="+  Data.getAll("jform[post]") + "}");
-	$(".btn-close", parent.document).click();
-      }
+	if (editor) {
+		var adminform = document.getElementById("adminForm");
+		var Data = new FormData(adminform);
+		editor.replaceSelection("{fbkpost profile=" + Data.getAll("jform[profile]") + ";post="+  Data.getAll("jform[post]") + "}");
+		$(".btn-close", parent.document).click();
+	}
 }
 
 function autoResize(iframe) {
-    $(iframe).height($(iframe).contents().find('html').height());
+	$(iframe).height($(iframe).contents().find('html').height());
 }
 
 function filloneNote($, profile, post)
 {
-     var ajaxField = $('div.note_one');
-      if (ajaxField) {
-            var url =  'index.php?option=com_jofacebook&view=facebookpost&tmpl=component&profile=' + profile + '&post='+ post;
-            ajaxField.html('<iframe  width="640" height="480" src="' + url + '" onload="autoResize(this);"></iframe>');
-        }
+	var ajaxField = $('div.note_one');
+	if (ajaxField) {
+			var url =  'index.php?option=com_jofacebook&view=facebookpost&tmpl=component&profile=' + profile + '&post='+ post;
+			ajaxField.html('<iframe  width="640" height="480" src="' + url + '" onload="autoResize(this);"></iframe>');
+	}
 }
-function showFacebookPost($) {       
-        var adminform = document.getElementById("adminForm");
+function showFacebookPost($) {
+	var adminform = document.getElementById("adminForm");
 	var Data = new FormData(adminform);
-        var profile =  Data.getAll("jform[profile]");
-        var post =  Data.getAll("jform[post]");
-       filloneNote($, profile, post);
+	var profile =  Data.getAll("jform[profile]");
+	var post =  Data.getAll("jform[post]");
+	filloneNote($, profile, post);
+       return false;
 }
 
 function onselectRow($, id) {
-    $.ajax({
+	$.ajax({
 		url:   'index.php?option=com_jofacebook&view=facebookpost&layout=json&id=' + id,
 		type: "POST",
 		dataType: "json",
 		success: function(data) {
 			$('#jform_profile').val(data['profile']);
-                       $('#jform_post').val(data['post']);
+			 $('#jform_post').val(data['post']);
+                        $('#jform_description').val(data['description']);
                         filloneNote($, data['profile'], data['post']);
 		},
 		error: function(xhr, status, text) {
@@ -73,11 +75,11 @@ function onselectRow($, id) {
 }
 
 $( document ).ready(function() {
-    var selectpost = $('#jform_title');
-    onselectRow($,  selectpost.find(":selected").val());
-    selectpost.on('change', function() {
-           onselectRow($, $(this).find(":selected").val());
-    });
+	var selectpost = $('#jform_title');
+	onselectRow($,  selectpost.find(":selected").val());
+	selectpost.on('change', function() {
+		onselectRow($, $(this).find(":selected").val());
+	});
 });
 
 /***[/JCBGUI$$$$]***/

@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.3
-    @build			15th August, 2025
+    @version		1.0.4
+    @build			8th October, 2025
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		default.php
@@ -55,11 +55,19 @@ defined('_JEXEC') or die;
 <?php
          switch($this->getLayout())
          {
-             case 'default':
-                   echo sprintf('<div class="fb-post" data-href="https://www.facebook.com/%s/posts/%s" 
+           case 'default':
+                if (!is_numeric($this->profile)) {
+                    echo sprintf('<div class="fb-post" data-href="https://www.facebook.com/%s/posts/%s" 
                                      data-show-text="true">&nbsp;</div>',
                                      $this->profile,
                                      $this->post);
+                }
+                 else {
+                    echo sprintf('<div class="fb-post" data-href="https://www.facebook.com/permalink.php?story_fbid=%s&id=%s" 
+                                     data-show-text="true">&nbsp;</div>',
+                                     $this->post,
+                                     $this->profile);
+                 }
                  break;
           case 'json':
                  $app = Factory::getApplication();
@@ -74,7 +82,7 @@ defined('_JEXEC') or die;
                         header('Cache-Control: max-age=120, private, must-revalidate');
                         header('Content-Disposition: attachment; filename="jcoaching.json"');
                        ob_end_clean();
-                       echo json_encode(["post" => $this->item->post, "profile" => $this->item->profile]);
+                       echo json_encode(["post" => $this->item->post, "profile" => $this->item->profile, "description" => $this->item->description ]);
                         Factory::getApplication()->close();
                  }
                break;

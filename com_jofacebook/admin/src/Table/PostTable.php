@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.3
-    @build			15th August, 2025
+    @version		1.0.4
+    @build			8th October, 2025
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		PostTable.php
