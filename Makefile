@@ -2,6 +2,7 @@ VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
 PKG=pkg_jofacebook
 ZIPFILE = $(PKG)-$(VERSION2).zip
+UPDATEFILE = $(PACKAGE)-update.xml
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
 
@@ -43,7 +44,7 @@ $(ZIPFILE): $(ZIPS)
 
 fixversions:
 	@echo "Updating all install xml files to version $(VERSION)"
-	@export ATVERS=$(VERSION); export ATDATE=$(DATE); find . \( -name '*.xml' ! -name 'default.xml' ! -name 'metadata.xml' ! -name 'config.xml' \) -exec  ./fixvd {} \;
+	@find . \( -name '*.xml' ! -name 'default.xml' ! -name 'metadata.xml' ! -name 'config.xml' \) -exec  ./fixvd.sh {} $(VERSION) \;
 
 revertversions:
 	@echo "Reverting all install xml files"
@@ -51,7 +52,7 @@ revertversions:
 
 fixsha:
 	@echo "Updating update xml files with checksums"
-	./fixsha.sh $(ZIPFILE) 'update_pkg.xml'
+	@(cd $(ROOT);./fixsha.sh $(ZIPFILE) $(UPDATEFILE))
 
 fixcopyrights:
 	@find . \( -name '*.php' -o -name '*.ini' -o -name '*.xml' \) -exec ./fixcopyrights.sh {} \;

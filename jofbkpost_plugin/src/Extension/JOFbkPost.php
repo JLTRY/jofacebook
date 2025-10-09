@@ -11,13 +11,13 @@
 
 namespace JLTRY\Plugin\Content\JOFbkPost\Extension;
 
-use Joomla\CMS\Plugin\CMSPlugin;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Event\Content\ContentPrepareEvent;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Plugin\CMSPlugin;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Event\SubscriberInterface;
-use Joomla\CMS\Event\Content\ContentPrepareEvent;
-use Joomla\CMS\Language\Text;
-use Joomla\CMS\Component\ComponentHelper;
 
 // phpcs:disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
