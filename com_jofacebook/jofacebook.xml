@@ -62,7 +62,7 @@
 	</languages>
 
 	<administration>
-		<menu>COM_JOFACEBOOK_MENU</menu>
+		<menu>COM_JOFACEBOOK</menu>
 		<submenu>
 			<!-- Instead of link you can specify individual link attributes -->
             <menu option="com_jofacebook" view="jofacebook">COM_JOFACEBOOK_MENU_DASHBOARD</menu>

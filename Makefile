@@ -2,10 +2,10 @@ VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
 PKG=pkg_jofacebook
 ZIPFILE = $(PKG)-$(VERSION2).zip
-UPDATEFILE = $(PACKAGE)-update.xml
-mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
-mkfile_dir := $(dir $(mkfile_path))
-
+UPDATEFILE = update_pkg.xml
+MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
+MKFILE_DIR := $(dir $(MKFILE_PATH))
+ROOT = $(shell pwd)
 
 # Only set DATE if you need to force the date.  
 # (Otherwise it uses the current date.)
@@ -58,7 +58,7 @@ fixcopyrights:
 	@find . \( -name '*.php' -o -name '*.ini' -o -name '*.xml' \) -exec ./fixcopyrights.sh {} \;
 
 untabify:
-	@find . -name '*.php' -exec $(mkfile_dir)/replacetabs.sh {} \;
+	@find . -name '*.php' -exec $(MKFILE_DIR)/replacetabs.sh {} \;
 
 
 
