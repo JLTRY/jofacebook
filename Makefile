@@ -2,10 +2,10 @@ VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
 PKG=pkg_jofacebook
 ZIPFILE = $(PKG)-$(VERSION2).zip
-UPDATEFILE = $(PACKAGE)-update.xml
+UPDATEFILE = update_pkg.xml
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_dir := $(dir $(mkfile_path))
-
+ROOT = $(shell pwd)
 
 # Only set DATE if you need to force the date.  
 # (Otherwise it uses the current date.)

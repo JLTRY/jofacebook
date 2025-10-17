@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <extension type="package" version="4.0" method="upgrade">
-    <name>PKG_JOFACEBOOK_DESCRIPTION</name>
+    <name>PKG_JOFACEBOOK</name>
     <packagename>jofacebook</packagename>
     <version>1.0.1</version>
     <creationDate>September 08, 2025</creationDate>
@@ -24,7 +24,7 @@
     </languages>
 
     <updateservers>
-       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jofacebook/master/pkg_jofacebook/update_pkg.xml</server>
+       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jofacebook/master/pkg_jofacebook/pkg_jofacebook-update_pkg.xml</server>
     </updateservers>
 
 </extension>
