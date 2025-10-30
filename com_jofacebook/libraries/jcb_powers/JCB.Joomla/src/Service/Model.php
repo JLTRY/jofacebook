@@ -33,52 +33,52 @@ class Model implements ServiceProviderInterface
 {
 
 /***[JCBGUI.power.main_class_code.29.$$$$]***/
-    /**
-     * Registers the service provider with a DI container.
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  void
-     * @since 3.2.0
-     */
-    public function register(Container $container)
-    {
-        $container->alias(Load::class, 'Model.Load')
-            ->share('Model.Load', [$this, 'getLoad'], true);
+	/**
+	 * Registers the service provider with a DI container.
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  void
+	 * @since 3.2.0
+	 */
+	public function register(Container $container)
+	{
+		$container->alias(Load::class, 'Model.Load')
+			->share('Model.Load', [$this, 'getLoad'], true);
 
-        $container->alias(Upsert::class, 'Model.Upsert')
-            ->share('Model.Upsert', [$this, 'getUpsert'], true);
-    }
+		$container->alias(Upsert::class, 'Model.Upsert')
+			->share('Model.Upsert', [$this, 'getUpsert'], true);
+	}
 
-    /**
-     * Get The Load Class.
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Load
-     * @since 3.2.0
-     */
-    public function getLoad(Container $container): Load
-    {
-        return new Load(
-            $container->get('Table')
-        );
-    }
+	/**
+	 * Get The Load Class.
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Load
+	 * @since 3.2.0
+	 */
+	public function getLoad(Container $container): Load
+	{
+		return new Load(
+			$container->get('Table')
+		);
+	}
 
-    /**
-     * Get The Upsert Class.
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Upsert
-     * @since 3.2.0
-     */
-    public function getUpsert(Container $container): Upsert
-    {
-        return new Upsert(
-            $container->get('Table')
-        );
-    }/***[/JCBGUI$$$$]***/
+	/**
+	 * Get The Upsert Class.
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Upsert
+	 * @since 3.2.0
+	 */
+	public function getUpsert(Container $container): Upsert
+	{
+		return new Upsert(
+			$container->get('Table')
+		);
+	}/***[/JCBGUI$$$$]***/
 
 }
 

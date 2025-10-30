@@ -28,16 +28,17 @@ final class Table extends BaseTable implements TableInterface
 {
 
 /***[JCBGUI.power.main_class_code.11.$$$$]***/
-    /**
-     * All areas/views/tables with their field details
-     *
-     * @var     array
-     * @since 3.2.0
-     **/
-    protected array $tables = [
+	/**
+	 * All areas/views/tables with their field details
+	 *
+	 * @var     array
+	 * @since 3.2.0
+	 **/
+	protected array $tables = [
         'post' => [
             'profile' => [
                 'name' => 'profile',
+                'guid' => '7a5c359e-00b0-4c5c-afc8-5cff3658d4bd',
                 'label' => 'COM_JOFACEBOOK_POST_PROFILE_LABEL',
                 'type' => 'text',
                 'title' => false,
@@ -56,6 +57,7 @@ final class Table extends BaseTable implements TableInterface
             ],
             'post' => [
                 'name' => 'post',
+                'guid' => '1374c9a0-051e-4a03-9eec-393483c18a2c',
                 'label' => 'COM_JOFACEBOOK_POST_POST_LABEL',
                 'type' => 'text',
                 'title' => false,
@@ -74,6 +76,7 @@ final class Table extends BaseTable implements TableInterface
             ],
             'category' => [
                 'name' => 'category',
+                'guid' => 'bd58a073-f97f-462b-a18e-df782299fde2',
                 'label' => 'COM_JOFACEBOOK_POST_CATEGORY_LABEL',
                 'type' => 'category',
                 'title' => false,
@@ -92,6 +95,7 @@ final class Table extends BaseTable implements TableInterface
             ],
             'description' => [
                 'name' => 'description',
+                'guid' => '2c2f4d20-2b76-467a-aa1c-8083bba844ca',
                 'label' => 'COM_JOFACEBOOK_POST_DESCRIPTION_LABEL',
                 'type' => 'text',
                 'title' => false,

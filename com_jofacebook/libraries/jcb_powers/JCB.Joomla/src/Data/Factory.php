@@ -36,28 +36,28 @@ abstract class Factory extends ExtendingFactory implements FactoryInterface
 {
 
 /***[JCBGUI.power.main_class_code.7.$$$$]***/
-    /**
-     * Package Container
-     *
-     * @var   Container|null
-     * @since 5.0.3
-     **/
-    protected static ?Container $container = null;
+	/**
+	 * Package Container
+	 *
+	 * @var   Container|null
+	 * @since 5.0.3
+	 **/
+	protected static ?Container $container = null;
 
-    /**
-     * Create a container object
-     *
-     * @return  Container
-     * @since 3.2.2
-     */
-    protected static function createContainer(): Container
-    {
-        return (new Container())
-            ->registerServiceProvider(new Table())
-            ->registerServiceProvider(new Database())
-            ->registerServiceProvider(new Model())
-            ->registerServiceProvider(new Data());
-    }/***[/JCBGUI$$$$]***/
+	/**
+	 * Create a container object
+	 *
+	 * @return  Container
+	 * @since 3.2.2
+	 */
+	protected static function createContainer(): Container
+	{
+		return (new Container())
+			->registerServiceProvider(new Table())
+			->registerServiceProvider(new Database())
+			->registerServiceProvider(new Model())
+			->registerServiceProvider(new Data());
+	}/***[/JCBGUI$$$$]***/
 
 }
 

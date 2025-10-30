@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-                JL Tryoen 
+				JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.4
-    @build			8th October, 2025
-    @created		12th August, 2025
-    @package		JOFacebook
-    @subpackage		provider.php
-    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-    @copyright		Copyright (C) 2015. All Rights Reserved
-    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+	@version		1.0.4
+	@build			8th October, 2025
+	@created		12th August, 2025
+	@package		JOFacebook
+	@subpackage		provider.php
+	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+	@copyright		Copyright (C) 2025. All Rights Reserved
+	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -51,37 +51,37 @@ use Joomla\DI\ServiceProviderInterface;
  */
 return new class () implements ServiceProviderInterface
 {
-    /**
-     * Registers the service provider with a DI container.
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  void
-     *
-     * @since   4.0.0
-     */
-    public function register(Container $container)
-    {
-        // (soon) $container->set(AssociationExtensionInterface::class, new AssociationsHelper());
+	/**
+	 * Registers the service provider with a DI container.
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  void
+	 *
+	 * @since   4.0.0
+	 */
+	public function register(Container $container)
+	{
+		// (soon) $container->set(AssociationExtensionInterface::class, new AssociationsHelper());
 
-        $container->registerServiceProvider(new CategoryFactory('\\JCB\\Component\\Jofacebook'));
-        $container->registerServiceProvider(new MVCFactory('\\JCB\\Component\\Jofacebook'));
-        $container->registerServiceProvider(new ComponentDispatcherFactory('\\JCB\\Component\\Jofacebook'));
-        $container->registerServiceProvider(new RouterFactory('\\JCB\\Component\\Jofacebook'));
+		$container->registerServiceProvider(new CategoryFactory('\\JCB\\Component\\Jofacebook'));
+		$container->registerServiceProvider(new MVCFactory('\\JCB\\Component\\Jofacebook'));
+		$container->registerServiceProvider(new ComponentDispatcherFactory('\\JCB\\Component\\Jofacebook'));
+		$container->registerServiceProvider(new RouterFactory('\\JCB\\Component\\Jofacebook'));
 
-        $container->set(
-            ComponentInterface::class,
-            function (Container $container) {
-                $component = new JofacebookComponent($container->get(ComponentDispatcherFactoryInterface::class));
+		$container->set(
+			ComponentInterface::class,
+			function (Container $container) {
+				$component = new JofacebookComponent($container->get(ComponentDispatcherFactoryInterface::class));
 
-                $component->setRegistry($container->get(Registry::class));
-                $component->setMVCFactory($container->get(MVCFactoryInterface::class));
-                $component->setCategoryFactory($container->get(CategoryFactoryInterface::class));
-                // (soon) $component->setAssociationExtension($container->get(AssociationExtensionInterface::class));
-                $component->setRouterFactory($container->get(RouterFactoryInterface::class));
+				$component->setRegistry($container->get(Registry::class));
+				$component->setMVCFactory($container->get(MVCFactoryInterface::class));
+				$component->setCategoryFactory($container->get(CategoryFactoryInterface::class));
+				// (soon) $component->setAssociationExtension($container->get(AssociationExtensionInterface::class));
+				$component->setRouterFactory($container->get(RouterFactoryInterface::class));
 
-                return $component;
-            }
-        );
-    }
+				return $component;
+			}
+		);
+	}
 };

@@ -4,7 +4,7 @@
 /-------------------------------------------------------------------------------------------------------/
 
 	@version		1.0.4
-	@build			8th October, 2025
+	@build			27th October, 2025
 	@created		12th August, 2025
 	@package		JOFacebook
 	@subpackage		JofacebookInstallerScript.php
@@ -191,23 +191,23 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
 	 */
 	public function uninstall(InstallerAdapter $adapter): bool
 	{
-        // Remove Related Component Data.
+		// Remove Related Component Data.
 
-        // Remove Post Data
-        $this->removeViewData("com_jofacebook.post");
+		// Remove Post Data
+		$this->removeViewData("com_jofacebook.post");
 
-        // Remove Post category Data
-        $this->removeViewData("com_jofacebook.post.category");
+		// Remove Post category Data
+		$this->removeViewData("com_jofacebook.post.category");
 
-        // Remove Asset Data.
-        $this->removeAssetData();
+		// Remove Asset Data.
+		$this->removeAssetData();
 
 
-        // Remove component from action logs extensions table.
-        $this->removeActionLogsExtensions();
+		// Remove component from action logs extensions table.
+		$this->removeActionLogsExtensions();
 
-        // Remove Post from action logs config table.
-        $this->removeActionLogConfig('com_jofacebook.post');
+		// Remove Post from action logs config table.
+		$this->removeActionLogConfig('com_jofacebook.post');
 		// little notice as after service, in case of bad experience with component.
 		echo '<div style="background-color: #fff;" class="alert alert-info">
 		<h2>Did something go wrong? Are you disappointed?</h2>
@@ -274,143 +274,143 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
 	 */
 	public function postflight(string $type, InstallerAdapter $adapter): bool
 	{
-        // We check if we have dynamic folders to copy
-        $this->moveFolders($adapter);
+		// We check if we have dynamic folders to copy
+		$this->moveFolders($adapter);
 
 		// set the default component settings
 		if ($type === 'install')
 		{
 
-            // Install Post Content Types.
-            $this->setContentType(
-                // typeTitle
-                'Jofacebook Post',
-                // typeAlias
-                'com_jofacebook.post',
-                // table
-                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
-                // rules
-                '',
-                // fieldMappings
-                '{"common": {"core_content_item_id": "id","core_title": "null","core_state": "published","core_alias": "null","core_created_time": "created","core_modified_time": "modified","core_body": "null","core_hits": "hits","core_publish_up": "null","core_publish_down": "null","core_access": "access","core_params": "params","core_featured": "null","core_metadata": "null","core_language": "null","core_images": "null","core_urls": "null","core_version": "version","core_ordering": "ordering","core_metakey": "null","core_metadesc": "null","core_catid": "category","core_xreference": "null","asset_id": "asset_id"},"special": {"profile":"profile","post":"post","description":"description"}}',
-                // router
-                '',
-                // contentHistoryOptions
-                '{"formFile": "administrator/components/com_jofacebook/forms/post.xml","hideFields": ["asset_id","checked_out","checked_out_time"],"ignoreChanges": ["modified_by","modified","checked_out","checked_out_time","version","hits"],"convertToInt": ["published","ordering","version","hits","category"],"displayLookup": [{"sourceColumn": "category","targetTable": "#__categories","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "created_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"},{"sourceColumn": "access","targetTable": "#__viewlevels","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "modified_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"}]}'
-            );
-            // Install Post category Content Types.
-            $this->setContentType(
-                // typeTitle
-                'Jofacebook Post Category',
-                // typeAlias
-                'com_jofacebook.post.category',
-                // table
-                '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}',
-                // rules
-                '',
-                // fieldMappings
-                '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}',
-                // router
-                '',
-                // contentHistoryOptions
-                '{"formFile":"administrator\/components\/com_categories\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}'
-            );
+			// Install Post Content Types.
+			$this->setContentType(
+				// typeTitle
+				'Jofacebook Post',
+				// typeAlias
+				'com_jofacebook.post',
+				// table
+				'{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
+				// rules
+				'',
+				// fieldMappings
+				'{"common": {"core_content_item_id": "id","core_title": "null","core_state": "published","core_alias": "null","core_created_time": "created","core_modified_time": "modified","core_body": "null","core_hits": "hits","core_publish_up": "null","core_publish_down": "null","core_access": "access","core_params": "params","core_featured": "null","core_metadata": "null","core_language": "null","core_images": "null","core_urls": "null","core_version": "version","core_ordering": "ordering","core_metakey": "null","core_metadesc": "null","core_catid": "category","core_xreference": "null","asset_id": "asset_id"},"special": {"profile":"profile","post":"post","description":"description"}}',
+				// router
+				'',
+				// contentHistoryOptions
+				'{"formFile": "administrator/components/com_jofacebook/forms/post.xml","hideFields": ["asset_id","checked_out","checked_out_time"],"ignoreChanges": ["modified_by","modified","checked_out","checked_out_time","version","hits"],"convertToInt": ["published","ordering","version","hits","category"],"displayLookup": [{"sourceColumn": "category","targetTable": "#__categories","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "created_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"},{"sourceColumn": "access","targetTable": "#__viewlevels","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "modified_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"}]}'
+			);
+			// Install Post category Content Types.
+			$this->setContentType(
+				// typeTitle
+				'Jofacebook Post Category',
+				// typeAlias
+				'com_jofacebook.post.category',
+				// table
+				'{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}',
+				// rules
+				'',
+				// fieldMappings
+				'{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}',
+				// router
+				'',
+				// contentHistoryOptions
+				'{"formFile":"administrator\/components\/com_categories\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}'
+			);
 
 
-            // Install the global extension params.
-            $this->setExtensionsParams(
-                '{"autorName":"Jean-Luc Tryoen","autorEmail":"jltryoen@orange.fr","appid":"-1","check_in":"-1 day","save_history":"1","history_limit":"10"}'
-            );
+			// Install the global extension params.
+			$this->setExtensionsParams(
+				'{"autorName":"Jean-Luc Tryoen","autorEmail":"jltryoen@orange.fr","appid":"-1","check_in":"-1 day","save_history":"1","history_limit":"10"}'
+			);
 
 
-            echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
-                <img src="components/com_jofacebook/assets/images/vdm-component.png"/>
-                </a></div>';
+			echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
+				<img src="components/com_jofacebook/assets/images/vdm-component.png"/>
+				</a></div>';
 
-            // Add component to the action logs extensions table.
-            $this->setActionLogsExtensions();
+			// Add component to the action logs extensions table.
+			$this->setActionLogsExtensions();
 
-            // Add Post to the action logs config table.
-            $this->setActionLogConfig(
-                // typeTitle
-                'POST',
-                // typeAlias
-                'com_jofacebook.post',
-                // idHolder
-                'id',
-                // titleHolder
-                'id',
-                // tableName
-                '#__jofacebook_post',
-                // textPrefix
-                'COM_JOFACEBOOK'
-            );
+			// Add Post to the action logs config table.
+			$this->setActionLogConfig(
+				// typeTitle
+				'POST',
+				// typeAlias
+				'com_jofacebook.post',
+				// idHolder
+				'id',
+				// titleHolder
+				'id',
+				// tableName
+				'#__jofacebook_post',
+				// textPrefix
+				'COM_JOFACEBOOK'
+			);
 		}
 
 		// do any updates needed
 		if ($type === 'update')
 		{
 
-            // Update Post Content Types.
-            $this->setContentType(
-                // typeTitle
-                'Jofacebook Post',
-                // typeAlias
-                'com_jofacebook.post',
-                // table
-                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
-                // rules
-                '',
-                // fieldMappings
-                '{"common": {"core_content_item_id": "id","core_title": "null","core_state": "published","core_alias": "null","core_created_time": "created","core_modified_time": "modified","core_body": "null","core_hits": "hits","core_publish_up": "null","core_publish_down": "null","core_access": "access","core_params": "params","core_featured": "null","core_metadata": "null","core_language": "null","core_images": "null","core_urls": "null","core_version": "version","core_ordering": "ordering","core_metakey": "null","core_metadesc": "null","core_catid": "category","core_xreference": "null","asset_id": "asset_id"},"special": {"profile":"profile","post":"post","description":"description"}}',
-                // router
-                '',
-                // contentHistoryOptions
-                '{"formFile": "administrator/components/com_jofacebook/forms/post.xml","hideFields": ["asset_id","checked_out","checked_out_time"],"ignoreChanges": ["modified_by","modified","checked_out","checked_out_time","version","hits"],"convertToInt": ["published","ordering","version","hits","category"],"displayLookup": [{"sourceColumn": "category","targetTable": "#__categories","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "created_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"},{"sourceColumn": "access","targetTable": "#__viewlevels","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "modified_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"}]}'
-            );
-            // Update Post category Content Types.
-            $this->setContentType(
-                // typeTitle
-                'Jofacebook Post Category',
-                // typeAlias
-                'com_jofacebook.post.category',
-                // table
-                '{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}',
-                // rules
-                '',
-                // fieldMappings
-                '{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}',
-                // router
-                '',
-                // contentHistoryOptions
-                '{"formFile":"administrator\/components\/com_categories\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}'
-            );
+			// Update Post Content Types.
+			$this->setContentType(
+				// typeTitle
+				'Jofacebook Post',
+				// typeAlias
+				'com_jofacebook.post',
+				// table
+				'{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
+				// rules
+				'',
+				// fieldMappings
+				'{"common": {"core_content_item_id": "id","core_title": "null","core_state": "published","core_alias": "null","core_created_time": "created","core_modified_time": "modified","core_body": "null","core_hits": "hits","core_publish_up": "null","core_publish_down": "null","core_access": "access","core_params": "params","core_featured": "null","core_metadata": "null","core_language": "null","core_images": "null","core_urls": "null","core_version": "version","core_ordering": "ordering","core_metakey": "null","core_metadesc": "null","core_catid": "category","core_xreference": "null","asset_id": "asset_id"},"special": {"profile":"profile","post":"post","description":"description"}}',
+				// router
+				'',
+				// contentHistoryOptions
+				'{"formFile": "administrator/components/com_jofacebook/forms/post.xml","hideFields": ["asset_id","checked_out","checked_out_time"],"ignoreChanges": ["modified_by","modified","checked_out","checked_out_time","version","hits"],"convertToInt": ["published","ordering","version","hits","category"],"displayLookup": [{"sourceColumn": "category","targetTable": "#__categories","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "created_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"},{"sourceColumn": "access","targetTable": "#__viewlevels","targetColumn": "id","displayColumn": "title"},{"sourceColumn": "modified_by","targetTable": "#__users","targetColumn": "id","displayColumn": "name"}]}'
+			);
+			// Update Post category Content Types.
+			$this->setContentType(
+				// typeTitle
+				'Jofacebook Post Category',
+				// typeAlias
+				'com_jofacebook.post.category',
+				// table
+				'{"special":{"dbtable":"#__categories","key":"id","type":"Category","prefix":"JTable","config":"array()"},"common":{"dbtable":"#__ucm_content","key":"ucm_id","type":"Corecontent","prefix":"JTable","config":"array()"}}',
+				// rules
+				'',
+				// fieldMappings
+				'{"common":{"core_content_item_id":"id","core_title":"title","core_state":"published","core_alias":"alias","core_created_time":"created_time","core_modified_time":"modified_time","core_body":"description", "core_hits":"hits","core_publish_up":"null","core_publish_down":"null","core_access":"access", "core_params":"params", "core_featured":"null", "core_metadata":"metadata", "core_language":"language", "core_images":"null", "core_urls":"null", "core_version":"version", "core_ordering":"null", "core_metakey":"metakey", "core_metadesc":"metadesc", "core_catid":"parent_id", "core_xreference":"null", "asset_id":"asset_id"}, "special":{"parent_id":"parent_id","lft":"lft","rgt":"rgt","level":"level","path":"path","extension":"extension","note":"note"}}',
+				// router
+				'',
+				// contentHistoryOptions
+				'{"formFile":"administrator\/components\/com_categories\/forms\/category.xml", "hideFields":["asset_id","checked_out","checked_out_time","version","lft","rgt","level","path","extension"], "ignoreChanges":["modified_user_id", "modified_time", "checked_out", "checked_out_time", "version", "hits", "path"],"convertToInt":["publish_up", "publish_down"], "displayLookup":[{"sourceColumn":"created_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"access","targetTable":"#__viewlevels","targetColumn":"id","displayColumn":"title"},{"sourceColumn":"modified_user_id","targetTable":"#__users","targetColumn":"id","displayColumn":"name"},{"sourceColumn":"parent_id","targetTable":"#__categories","targetColumn":"id","displayColumn":"title"}]}'
+			);
 
 
 
-            echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
-                <img src="components/com_jofacebook/assets/images/vdm-component.png"/>
-                </a>
-                <h3>Upgrade to Version 1.0.4 Was Successful! Let us know if anything is not working as expected.</h3></div>';
+			echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
+				<img src="components/com_jofacebook/assets/images/vdm-component.png"/>
+				</a>
+				<h3>Upgrade to Version 1.0.4 Was Successful! Let us know if anything is not working as expected.</h3></div>';
 
-            // Add/Update component in the action logs extensions table.
-            $this->setActionLogsExtensions();
+			// Add/Update component in the action logs extensions table.
+			$this->setActionLogsExtensions();
 
-            // Add/Update Post in the action logs config table.
-            $this->setActionLogConfig(
-                // typeTitle
-                'POST',
-                // typeAlias
-                'com_jofacebook.post',
-                // idHolder
-                'id',
-                // titleHolder
-                'id',
-                // tableName
-                '#__jofacebook_post',
-                // textPrefix
-                'COM_JOFACEBOOK'
-            );
+			// Add/Update Post in the action logs config table.
+			$this->setActionLogConfig(
+				// typeTitle
+				'POST',
+				// typeAlias
+				'com_jofacebook.post',
+				// idHolder
+				'id',
+				// titleHolder
+				'id',
+				// tableName
+				'#__jofacebook_post',
+				// textPrefix
+				'COM_JOFACEBOOK'
+			);
 		}
 
 		// move CLI files
@@ -1330,9 +1330,9 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
 
 		// Autoloaders to check
 		$autoloaders = [
-            __DIR__ . '/JofacebookInstallerPowerloader.php',
-            JPATH_ADMINISTRATOR . '/components/com_jofacebook/src/Helper/PowerloaderHelper.php'
-        ];
+			__DIR__ . '/JofacebookInstallerPowerloader.php',
+			JPATH_ADMINISTRATOR . '/components/com_jofacebook/src/Helper/PowerloaderHelper.php'
+		];
 
 		foreach ($autoloaders as $autoloader)
 		{
@@ -1350,41 +1350,41 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
 		return false;
 	}
 
-    /**
-     * Method to move folders into place.
-     *
-     * @param   InstallerAdapter  $adapter  The adapter calling this method
-     *
-     * @return void
-     * @since 4.4.2
-     */
-    protected function moveFolders(InstallerAdapter $adapter): void
-    {
-        // get the installation path
-        $installer = $adapter->getParent();
-        $installPath = $installer->getPath('source');
-        // get all the folders
-        $folders = Folder::folders($installPath);
-        // check if we have folders we may want to copy
-        $doNotCopy = ['media','admin','site']; // Joomla already deals with these
-        if (count((array) $folders) > 1)
-        {
-            foreach ($folders as $folder)
-            {
-                // Only copy if not a standard folders
-                if (!in_array($folder, $doNotCopy))
-                {
-                    // set the source path
-                    $src = $installPath.'/'.$folder;
-                    // set the destination path
-                    $dest = JPATH_ROOT.'/'.$folder;
-                    // now try to copy the folder
-                    if (!Folder::copy($src, $dest, '', true))
-                    {
-                        $this->app->enqueueMessage('Could not copy '.$folder.' folder into place, please make sure destination is writable!', 'error');
-                    }
-                }
-            }
-        }
-    }
+	/**
+	 * Method to move folders into place.
+	 *
+	 * @param   InstallerAdapter  $adapter  The adapter calling this method
+	 *
+	 * @return void
+	 * @since 4.4.2
+	 */
+	protected function moveFolders(InstallerAdapter $adapter): void
+	{
+		// get the installation path
+		$installer = $adapter->getParent();
+		$installPath = $installer->getPath('source');
+		// get all the folders
+		$folders = Folder::folders($installPath);
+		// check if we have folders we may want to copy
+		$doNotCopy = ['media','admin','site']; // Joomla already deals with these
+		if (count((array) $folders) > 1)
+		{
+			foreach ($folders as $folder)
+			{
+				// Only copy if not a standard folders
+				if (!in_array($folder, $doNotCopy))
+				{
+					// set the source path
+					$src = $installPath.'/'.$folder;
+					// set the destination path
+					$dest = JPATH_ROOT.'/'.$folder;
+					// now try to copy the folder
+					if (!Folder::copy($src, $dest, '', true))
+					{
+						$this->app->enqueueMessage('Could not copy '.$folder.' folder into place, please make sure destination is writable!', 'error');
+					}
+				}
+			}
+		}
+	}
 }

@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-                JL Tryoen 
+				JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.4
-    @build			8th October, 2025
-    @created		12th August, 2025
-    @package		JOFacebook
-    @subpackage		PostTable.php
-    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-    @copyright		Copyright (C) 2015. All Rights Reserved
-    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+	@version		1.0.4
+	@build			8th October, 2025
+	@created		12th August, 2025
+	@package		JOFacebook
+	@subpackage		PostTable.php
+	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+	@copyright		Copyright (C) 2025. All Rights Reserved
+	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -49,330 +49,330 @@ use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
  */
 class PostTable extends Table implements VersionableTableInterface, TaggableTableInterface, CurrentUserInterface
 {
-    use TaggableTableTrait;
-    use CurrentUserTrait;
+	use TaggableTableTrait;
+	use CurrentUserTrait;
 
-    /**
-     * Constructor
-     *
-     * @param   DatabaseDriver        $db          Database connector object
-     * @param   ?DispatcherInterface  $dispatcher  Event dispatcher for this table
-     *
-     * @param object Database connector object
-     * @since  4.0
-     */
-    function __construct(DatabaseDriver $db, ?DispatcherInterface $dispatcher = null)
-    {
-        // The type alias generally is the internal component name with the
-        //   content type. Ex.: com_content.article
-        $this->typeAlias = 'com_jofacebook.post';
+	/**
+	 * Constructor
+	 *
+	 * @param   DatabaseDriver        $db          Database connector object
+	 * @param   ?DispatcherInterface  $dispatcher  Event dispatcher for this table
+	 *
+	 * @param object Database connector object
+	 * @since  4.0
+	 */
+	function __construct(DatabaseDriver $db, ?DispatcherInterface $dispatcher = null)
+	{
+		// The type alias generally is the internal component name with the
+		//   content type. Ex.: com_content.article
+		$this->typeAlias = 'com_jofacebook.post';
 
-        // Ensure the params and metadata in json encoded in the bind method
-        $this->_jsonEncode = ['params', 'metadata'];
+		// Ensure the params and metadata in json encoded in the bind method
+		$this->_jsonEncode = ['params', 'metadata'];
 
-        // Indicates that columns fully support the NULL value in the database
-        // $this->_supportNullValue = true; // hmmm will keep an eye on this ;)
+		// Indicates that columns fully support the NULL value in the database
+		$this->_supportNullValue = true;
 
-        parent::__construct('#__jofacebook_post', 'id', $db, $dispatcher);
-    }
+		parent::__construct('#__jofacebook_post', 'id', $db, $dispatcher);
+	}
 
-    /**
-     * Method to bind an associative array or object to the Table instance.This
-     * method only binds properties that are publicly accessible and optionally
-     * takes an array of properties to ignore when binding.
-     *
-     * @param   array|object  $src     An associative array or object to bind to the Table instance.
-     * @param   array|string  $ignore  An optional array or space separated list of properties to ignore while binding.
-     *
-     * @return  boolean  True on success.
-     *
-     * @since   1.7.0
-     * @throws  \InvalidArgumentException
-     */
-    public function bind($array, $ignore = '')
-    {
-        // Bind the rules.
-        if (isset($array['rules']) && is_array($array['rules']))
-        {
-            $rules = new AccessRules($array['rules']);
-            $this->setRules($rules);
-        }
+	/**
+	 * Method to bind an associative array or object to the Table instance.This
+	 * method only binds properties that are publicly accessible and optionally
+	 * takes an array of properties to ignore when binding.
+	 *
+	 * @param   array|object  $src     An associative array or object to bind to the Table instance.
+	 * @param   array|string  $ignore  An optional array or space separated list of properties to ignore while binding.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @since   1.7.0
+	 * @throws  \InvalidArgumentException
+	 */
+	public function bind($array, $ignore = '')
+	{
+		// Bind the rules.
+		if (isset($array['rules']) && is_array($array['rules']))
+		{
+			$rules = new AccessRules($array['rules']);
+			$this->setRules($rules);
+		}
 
-        return parent::bind($array, $ignore);
-    }
+		return parent::bind($array, $ignore);
+	}
 
-    /**
-     * Overload the store method for the Post table.
-     *
-     * @param   boolean    Toggle whether null values should be updated.
-     *
-     * @return  boolean  True on success, false on failure.
-     * @since   1.6
-     */
-    public function store($updateNulls = false)
-    {
-        $date   = Factory::getDate()->toSql();
-        $userId = $this->getCurrentUser()->id;
+	/**
+	 * Overload the store method for the Post table.
+	 *
+	 * @param   boolean    Toggle whether null values should be updated.
+	 *
+	 * @return  boolean  True on success, false on failure.
+	 * @since   1.6
+	 */
+	public function store($updateNulls = true)
+	{
+		$date   = Factory::getDate()->toSql();
+		$userId = $this->getCurrentUser()->id;
 
-        if ($this->id)
-        {
-            // Existing item
-            $this->modified       = $date;
-            $this->modified_by    = $userId;
-        }
-        else
-        {
-            // New post. A post created and created_by field can be set by the user,
-            // so we don't touch either of these if they are set.
-            if (!(int) $this->created)
-            {
-                $this->created = $date;
-            }
-            if (empty($this->created_by))
-            {
-                $this->created_by = $userId;
-            }
-        }
+		if ($this->id)
+		{
+			// Existing item
+			$this->modified       = $date;
+			$this->modified_by    = $userId;
+		}
+		else
+		{
+			// New post. A post created and created_by field can be set by the user,
+			// so we don't touch either of these if they are set.
+			if (!(int) $this->created)
+			{
+				$this->created = $date;
+			}
+			if (empty($this->created_by))
+			{
+				$this->created_by = $userId;
+			}
+		}
 
-        if (isset($this->alias))
-        {
-            // Verify that the alias is unique
-            $table = new self($this->getDbo(), $this->getDispatcher());
+		if (isset($this->alias))
+		{
+			// Verify that the alias is unique
+			$table = new self($this->getDbo(), $this->getDispatcher());
 
-            if ($table->load(['alias' => $this->alias, 'category' => $this->category]) && ($table->id != $this->id || $this->id == 0))
-            {
-                $this->setError(Text::_('COM_JOFACEBOOK_POST_ERROR_UNIQUE_ALIAS'));
+			if ($table->load(['alias' => $this->alias, 'category' => $this->category]) && ($table->id != $this->id || $this->id == 0))
+			{
+				$this->setError(Text::_('COM_JOFACEBOOK_POST_ERROR_UNIQUE_ALIAS'));
 
-                if ($table->published === -2)
-                {
-                    $this->setError(Text::_('COM_JOFACEBOOK_POST_ERROR_UNIQUE_ALIAS_TRASHED'));
-                }
+				if ($table->published === -2)
+				{
+					$this->setError(Text::_('COM_JOFACEBOOK_POST_ERROR_UNIQUE_ALIAS_TRASHED'));
+				}
 
-                return false;
-            }
-        }
+				return false;
+			}
+		}
 
-        if (isset($this->url))
-        {
-            // Convert IDN urls to punycode
-            $this->url = PunycodeHelper::urlToPunycode($this->url);
-        }
+		if (isset($this->url))
+		{
+			// Convert IDN urls to punycode
+			$this->url = PunycodeHelper::urlToPunycode($this->url);
+		}
 
-        if (isset($this->website))
-        {
-            // Convert IDN urls to punycode
-            $this->website = PunycodeHelper::urlToPunycode($this->website);
-        }
+		if (isset($this->website))
+		{
+			// Convert IDN urls to punycode
+			$this->website = PunycodeHelper::urlToPunycode($this->website);
+		}
 
-        return parent::store($updateNulls);
-    }
+		return parent::store($updateNulls);
+	}
 
-    /**
-     * Overloaded check method to ensure data integrity.
-     *
-     * @return  boolean  True on success.
-     *
-     * @see     \Joomla\CMS\Table\Table::check
-     * @since   1.5
-     */
-    public function check()
-    {
-        try {
-                parent::check();
-        } catch (\Exception $e) {
-                $this->setError($e->getMessage());
-                return false;
-        }
+	/**
+	 * Overloaded check method to ensure data integrity.
+	 *
+	 * @return  boolean  True on success.
+	 *
+	 * @see     \Joomla\CMS\Table\Table::check
+	 * @since   1.5
+	 */
+	public function check()
+	{
+		try {
+				parent::check();
+		} catch (\Exception $e) {
+				$this->setError($e->getMessage());
+				return false;
+		}
 
-        if (isset($this->alias))
-        {
-            // Generate a valid alias
-            $this->generateAlias();
+		if (isset($this->alias))
+		{
+			// Generate a valid alias
+			$this->generateAlias();
 
-            $table = new self($this->getDbo(), $this->getDispatcher());
+			$table = new self($this->getDbo(), $this->getDispatcher());
 
-            while ($table->load(['alias' => $this->alias]) && ($table->id != $this->id || $this->id == 0))
-            {
-                $this->alias = StringHelper::increment($this->alias, 'dash');
-            }
-        }
+			while ($table->load(['alias' => $this->alias]) && ($table->id != $this->id || $this->id == 0))
+			{
+				$this->alias = StringHelper::increment($this->alias, 'dash');
+			}
+		}
 
-        /*
-         * Clean up keywords -- eliminate extra spaces between phrases
-         * and cr (\r) and lf (\n) characters from string.
-         * Only process if not empty.
-          */
-        if (!empty($this->metakey))
-        {
-            // Array of characters to remove.
-            $bad_characters = array("\n", "\r", "\"", "<", ">");
+		/*
+		 * Clean up keywords -- eliminate extra spaces between phrases
+		 * and cr (\r) and lf (\n) characters from string.
+		 * Only process if not empty.
+		  */
+		if (!empty($this->metakey))
+		{
+			// Array of characters to remove.
+			$bad_characters = array("\n", "\r", "\"", "<", ">");
 
-            // Remove bad characters.
-            $after_clean = StringHelper::str_ireplace($bad_characters, "", $this->metakey);
+			// Remove bad characters.
+			$after_clean = StringHelper::str_ireplace($bad_characters, "", $this->metakey);
 
-            // Create array using commas as delimiter.
-            $keys = explode(',', $after_clean);
-            $clean_keys = [];
+			// Create array using commas as delimiter.
+			$keys = explode(',', $after_clean);
+			$clean_keys = [];
 
-            foreach ($keys as $key)
-            {
-                // Ignore blank keywords.
-                if (trim($key))
-                {
-                    $clean_keys[] = trim($key);
-                }
-            }
+			foreach ($keys as $key)
+			{
+				// Ignore blank keywords.
+				if (trim($key))
+				{
+					$clean_keys[] = trim($key);
+				}
+			}
 
-            // Put array back together delimited by ", "
-            $this->metakey = implode(", ", $clean_keys);
-        }
+			// Put array back together delimited by ", "
+			$this->metakey = implode(", ", $clean_keys);
+		}
 
-        // Clean up description -- eliminate quotes and <> brackets
-        if (!empty($this->metadesc))
-        {
-            // Only process if not empty
-            $bad_characters = array("\"", "<", ">");
-            $this->metadesc = StringHelper::str_ireplace($bad_characters, "", $this->metadesc);
-        }
+		// Clean up description -- eliminate quotes and <> brackets
+		if (!empty($this->metadesc))
+		{
+			// Only process if not empty
+			$bad_characters = array("\"", "<", ">");
+			$this->metadesc = StringHelper::str_ireplace($bad_characters, "", $this->metadesc);
+		}
 
-        // If we don't have any access rules set at this point just use an empty AccessRules class
-        if (!$this->getRules())
-        {
-            $rules = $this->getDefaultAssetValues('com_jofacebook.post.'.$this->id);
-            $this->setRules($rules);
-        }
+		// If we don't have any access rules set at this point just use an empty AccessRules class
+		if (!$this->getRules())
+		{
+			$rules = $this->getDefaultAssetValues('com_jofacebook.post.'.$this->id);
+			$this->setRules($rules);
+		}
 
-        // Set ordering
-        if ($this->published < 0)
-        {
-            // Set ordering to 0 if state is archived or trashed
-            $this->ordering = 0;
-        }
+		// Set ordering
+		if ($this->published < 0)
+		{
+			// Set ordering to 0 if state is archived or trashed
+			$this->ordering = 0;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    /**
-     * Gets the default asset values for a component.
-     *
-     * @param   $string  $component  The component asset name to search for
-     *
-     * @return  AccessRules  The AccessRules object for the asset
-     */
-    protected function getDefaultAssetValues($component, $try = true)
-    {
-        // Need to find the asset id by the name of the component.
-        $db = Factory::getContainer()->get(DatabaseInterface::class);
-        $query = $db->getQuery(true)
-            ->select($db->quoteName('id'))
-            ->from($db->quoteName('#__assets'))
-            ->where($db->quoteName('name') . ' = ' . $db->quote($component));
-        $db->setQuery($query);
-        $db->execute();
-        if ($db->loadRowList())
-        {
-            // asset already set so use saved rules
-            $assetId = (int) $db->loadResult();
-            return AccessRules::getAssetRules($assetId); // (TODO) instead of keeping inherited Allowed it becomes Allowed.
-        }
-        // try again
-        elseif ($try)
-        {
-            $try = explode('.',$component);
-            $result =  $this->getDefaultAssetValues($try[0], false);
-            if ($result instanceof AccessRules)
-            {
-                if (isset($try[1]))
-                {
-                    $_result = (string) $result;
-                    $_result = json_decode($_result);
-                    foreach ($_result as $name => &$rule)
-                    {
-                        $v = explode('.', $name);
-                        if ($try[1] !== $v[0])
-                        {
-                            // remove since it is not part of this view
-                            unset($_result->$name);
-                        }
-                        else
-                        {
-                            // clear the value since we inherit
-                            $rule = [];
-                        }
-                    }
-                    // check if there are any view values remaining
-                    if (count( (array) $_result))
-                    {
-                        $_result = json_encode($_result);
-                        $_result = array($_result);
-                        // Instantiate and return the AccessRules object for the asset rules.
-                        $rules = new AccessRules;
-                        $rules->mergeCollection($_result);
+	/**
+	 * Gets the default asset values for a component.
+	 *
+	 * @param   $string  $component  The component asset name to search for
+	 *
+	 * @return  AccessRules  The AccessRules object for the asset
+	 */
+	protected function getDefaultAssetValues($component, $try = true)
+	{
+		// Need to find the asset id by the name of the component.
+		$db = Factory::getContainer()->get(DatabaseInterface::class);
+		$query = $db->getQuery(true)
+			->select($db->quoteName('id'))
+			->from($db->quoteName('#__assets'))
+			->where($db->quoteName('name') . ' = ' . $db->quote($component));
+		$db->setQuery($query);
+		$db->execute();
+		if ($db->loadRowList())
+		{
+			// asset already set so use saved rules
+			$assetId = (int) $db->loadResult();
+			return AccessRules::getAssetRules($assetId); // (TODO) instead of keeping inherited Allowed it becomes Allowed.
+		}
+		// try again
+		elseif ($try)
+		{
+			$try = explode('.',$component);
+			$result =  $this->getDefaultAssetValues($try[0], false);
+			if ($result instanceof AccessRules)
+			{
+				if (isset($try[1]))
+				{
+					$_result = (string) $result;
+					$_result = json_decode($_result);
+					foreach ($_result as $name => &$rule)
+					{
+						$v = explode('.', $name);
+						if ($try[1] !== $v[0])
+						{
+							// remove since it is not part of this view
+							unset($_result->$name);
+						}
+						else
+						{
+							// clear the value since we inherit
+							$rule = [];
+						}
+					}
+					// check if there are any view values remaining
+					if (count( (array) $_result))
+					{
+						$_result = json_encode($_result);
+						$_result = array($_result);
+						// Instantiate and return the AccessRules object for the asset rules.
+						$rules = new AccessRules;
+						$rules->mergeCollection($_result);
 
-                        return $rules;
-                    }
-                }
-                return $result;
-            }
-        }
-        return AccessRules::getAssetRules(0);
-    }
+						return $rules;
+					}
+				}
+				return $result;
+			}
+		}
+		return AccessRules::getAssetRules(0);
+	}
 
-    /**
-     * Get the type alias for the history table
-     *
-     * The type alias generally is the internal component name with the
-     * content type. Ex.: com_content.article
-     *
-     * @return  string  The alias as described above
-     *
-     * @since   3.10.0
-     */
-    public function getTypeAlias()
-    {
-        return $this->typeAlias;
-    }
+	/**
+	 * Get the type alias for the history table
+	 *
+	 * The type alias generally is the internal component name with the
+	 * content type. Ex.: com_content.article
+	 *
+	 * @return  string  The alias as described above
+	 *
+	 * @since   3.10.0
+	 */
+	public function getTypeAlias()
+	{
+		return $this->typeAlias;
+	}
 
-    /**
-     * Method to compute the default name of the asset.
-     * The default name is in the form table_name.id
-     * where id is the value of the primary key of the table.
-     *
-     * @return  string
-     *
-     * @since   1.7.0
-     */
-    protected function _getAssetName()
-    {
-        $k = $this->_tbl_key;
+	/**
+	 * Method to compute the default name of the asset.
+	 * The default name is in the form table_name.id
+	 * where id is the value of the primary key of the table.
+	 *
+	 * @return  string
+	 *
+	 * @since   1.7.0
+	 */
+	protected function _getAssetName()
+	{
+		$k = $this->_tbl_key;
 
-        return $this->getTypeAlias() . '.' . (int) $this->$k;
-    }
+		return $this->getTypeAlias() . '.' . (int) $this->$k;
+	}
 
-    /**
-     * Method to get the parent asset under which to register this one.
-     *
-     * By default, all assets are registered to the ROOT node with ID, which will default to 1 if none exists.
-     * An extended class can define a table and ID to lookup.  If the asset does not exist it will be created.
-     *
-     * @param   Table    $table  A Table object for the asset parent.
-     * @param   integer  $id     Id to look up
-     *
-     * @return  integer
-     *
-     * @since   1.7.0
-     */
-    protected function _getAssetParentId(Table $table = null, $id = null)
-    {
-        /** @var Asset $assets */
-        $assets = self::getInstance('Asset', 'JTable', ['dbo' => $this->getDbo()]);
-        $rootId = $assets->getRootId();
+	/**
+	 * Method to get the parent asset under which to register this one.
+	 *
+	 * By default, all assets are registered to the ROOT node with ID, which will default to 1 if none exists.
+	 * An extended class can define a table and ID to lookup.  If the asset does not exist it will be created.
+	 *
+	 * @param   Table    $table  A Table object for the asset parent.
+	 * @param   integer  $id     Id to look up
+	 *
+	 * @return  integer
+	 *
+	 * @since   1.7.0
+	 */
+	protected function _getAssetParentId(Table $table = null, $id = null)
+	{
+		/** @var Asset $assets */
+		$assets = self::getInstance('Asset', 'JTable', ['dbo' => $this->getDbo()]);
+		$rootId = $assets->getRootId();
 
-        // load the jofacebook asset
-        $assets->loadByName('com_jofacebook');
+		// load the jofacebook asset
+		$assets->loadByName('com_jofacebook');
 
-        return $assets->id ?? $rootId ?? 1;
-    }
+		return $assets->id ?? $rootId ?? 1;
+	}
 
     /**
      * This view does not actually have an alias

@@ -22,19 +22,19 @@ interface TableValidatorInterface
 {
 
 /***[JCBGUI.power.main_class_code.18.$$$$]***/
-    /**
-     * Returns the valid value based on datatype definition.
-     * If the value is valid, return it. If not, return the default value,
-     * NULL (if allowed), or an empty string if 'EMPTY' is set.
-     *
-     * @param mixed  $value  The value to validate.
-     * @param string $field  The field name.
-     * @param string $table  The table name.
-     *
-     * @return mixed Returns the valid value, or the default, NULL, or empty string based on validation.
-     * @since 5.3.0
-     */
-    public function getValid($value, string $field, string $table);/***[/JCBGUI$$$$]***/
+	/**
+	 * Returns the valid value based on datatype definition.
+	 * If the value is valid, return it. If not, return the default value,
+	 * NULL (if allowed), or an empty string if 'EMPTY' is set.
+	 *
+	 * @param mixed  $value  The value to validate.
+	 * @param string $field  The field name.
+	 * @param string $table  The table name.
+	 *
+	 * @return mixed Returns the valid value, or the default, NULL, or empty string based on validation.
+	 * @since 5.3.0
+	 */
+	public function getValid($value, string $field, string $table);/***[/JCBGUI$$$$]***/
 
 }
 

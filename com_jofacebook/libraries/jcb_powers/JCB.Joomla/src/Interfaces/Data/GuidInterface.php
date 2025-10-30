@@ -24,19 +24,19 @@ interface GuidInterface
 {
 
 /***[JCBGUI.power.main_class_code.48.$$$$]***/
-    /**
-     * Returns a GUIDv4 string.
-     * 
-     * This function uses the best cryptographically secure method
-     * available on the platform with a fallback to an older, less secure version.
-     *
-     * @param string $key The key to check and modify values.
-     *
-     * @return string A GUIDv4 string.
-     *
-     * @since 5.0.2
-     */
-    public function getGuid(string $key): string;/***[/JCBGUI$$$$]***/
+	/**
+	 * Returns a GUIDv4 string.
+	 * 
+	 * This function uses the best cryptographically secure method
+	 * available on the platform with a fallback to an older, less secure version.
+	 *
+	 * @param string $key The key to check and modify values.
+	 *
+	 * @return string A GUIDv4 string.
+	 *
+	 * @since 5.0.2
+	 */
+	public function getGuid(string $key): string;/***[/JCBGUI$$$$]***/
 
 }
 

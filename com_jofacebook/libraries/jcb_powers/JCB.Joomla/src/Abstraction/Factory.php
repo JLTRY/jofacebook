@@ -43,42 +43,42 @@ abstract class Factory implements FactoryInterface
 {
 
 /***[JCBGUI.power.main_class_code.9.$$$$]***/
-    /**
-     * Get any class from the package container
-     *
-     * @param   string  $key  The container class key
-     *
-     * @return  Mixed
-     * @since 0.0.0
-     */
-    public static function _($key)
-    {
-        return static::getContainer()->get($key);
-    }
+	/**
+	 * Get any class from the package container
+	 *
+	 * @param   string  $key  The container class key
+	 *
+	 * @return  Mixed
+	 * @since 0.0.0
+	 */
+	public static function _($key)
+	{
+		return static::getContainer()->get($key);
+	}
 
-    /**
-     * Get the global package container
-     *
-     * @return  Container
-     * @since 0.0.0
-     */
-    public static function getContainer(): Container
-    {
-        if (!static::$container)
-        {
-            static::$container = static::createContainer();
-        }
+	/**
+	 * Get the global package container
+	 *
+	 * @return  Container
+	 * @since 0.0.0
+	 */
+	public static function getContainer(): Container
+	{
+		if (!static::$container)
+		{
+			static::$container = static::createContainer();
+		}
 
-        return static::$container;
-    }
+		return static::$container;
+	}
 
-    /**
-     * Create a container object
-     *
-     * @return  Container
-     * @since 0.0.0
-     */
-    abstract protected static function createContainer(): Container;/***[/JCBGUI$$$$]***/
+	/**
+	 * Create a container object
+	 *
+	 * @return  Container
+	 * @since 0.0.0
+	 */
+	abstract protected static function createContainer(): Container;/***[/JCBGUI$$$$]***/
 
 }
 

@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-                JL Tryoen 
+				JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.4
-    @build			8th October, 2025
-    @created		12th August, 2025
-    @package		JOFacebook
-    @subpackage		modal.php
-    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-    @copyright		Copyright (C) 2015. All Rights Reserved
-    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+	@version		1.0.4
+	@build			8th October, 2025
+	@created		12th August, 2025
+	@package		JOFacebook
+	@subpackage		modal.php
+	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+	@copyright		Copyright (C) 2025. All Rights Reserved
+	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -33,12 +33,14 @@ defined('_JEXEC') or die;
 
 $app = Factory::getApplication();
 
-if ($app->isClient('site')) {
+if ($app->isClient('site'))
+{
     Session::checkToken('get') or die(Text::_('JINVALID_TOKEN'));
 }
 
 // dynamic selection of title key (link in modal)
-$this->modalTitleKey = $app->input->get('titleKey', 'id', 'word');
+$input = method_exists($app, 'getInput') ? $app->getInput() : $app->input;
+$this->modalTitleKey = $input->get('titleKey', 'id', 'word');
 
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $this->getDocument()->getWebAssetManager();

@@ -35,80 +35,80 @@ class Database implements ServiceProviderInterface
 {
 
 /***[JCBGUI.power.main_class_code.19.$$$$]***/
-    /**
-     * Registers the service provider with a DI container.
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  void
-     * @since 3.2.0
-     */
-    public function register(Container $container)
-    {
-        $container->alias(Load::class, 'Load')
-            ->share('Load', [$this, 'getLoad'], true);
+	/**
+	 * Registers the service provider with a DI container.
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  void
+	 * @since 3.2.0
+	 */
+	public function register(Container $container)
+	{
+		$container->alias(Load::class, 'Load')
+			->share('Load', [$this, 'getLoad'], true);
 
-        $container->alias(Insert::class, 'Insert')
-            ->share('Insert', [$this, 'getInsert'], true);
+		$container->alias(Insert::class, 'Insert')
+			->share('Insert', [$this, 'getInsert'], true);
 
-        $container->alias(Update::class, 'Update')
-            ->share('Update', [$this, 'getUpdate'], true);
+		$container->alias(Update::class, 'Update')
+			->share('Update', [$this, 'getUpdate'], true);
 
-        $container->alias(Delete::class, 'Delete')
-            ->share('Delete', [$this, 'getDelete'], true);
-    }
+		$container->alias(Delete::class, 'Delete')
+			->share('Delete', [$this, 'getDelete'], true);
+	}
 
-    /**
-     * Get the Core Load Database
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Load
-     * @since 3.2.0
-     */
-    public function getLoad(Container $container): Load
-    {
-        return new Load();
-    }
+	/**
+	 * Get the Core Load Database
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Load
+	 * @since 3.2.0
+	 */
+	public function getLoad(Container $container): Load
+	{
+		return new Load();
+	}
 
-    /**
-     * Get the Core Insert Database
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Insert
-     * @since 3.2.0
-     */
-    public function getInsert(Container $container): Insert
-    {
-        return new Insert();
-    }
+	/**
+	 * Get the Core Insert Database
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Insert
+	 * @since 3.2.0
+	 */
+	public function getInsert(Container $container): Insert
+	{
+		return new Insert();
+	}
 
-    /**
-     * Get the Core Update Database
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Update
-     * @since 3.2.0
-     */
-    public function getUpdate(Container $container): Update
-    {
-        return new Update();
-    }
+	/**
+	 * Get the Core Update Database
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Update
+	 * @since 3.2.0
+	 */
+	public function getUpdate(Container $container): Update
+	{
+		return new Update();
+	}
 
-    /**
-     * Get the Core Delete Database
-     *
-     * @param   Container  $container  The DI container.
-     *
-     * @return  Delete
-     * @since 3.2.2
-     */
-    public function getDelete(Container $container): Delete
-    {
-        return new Delete();
-    }/***[/JCBGUI$$$$]***/
+	/**
+	 * Get the Core Delete Database
+	 *
+	 * @param   Container  $container  The DI container.
+	 *
+	 * @return  Delete
+	 * @since 3.2.2
+	 */
+	public function getDelete(Container $container): Delete
+	{
+		return new Delete();
+	}/***[/JCBGUI$$$$]***/
 
 }
 

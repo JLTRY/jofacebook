@@ -1,6 +1,6 @@
 VERSION = "1.0.1"
 VERSION2 = $(shell echo $(VERSION)|sed 's/ /-/g')
-PKG=pkg_jofacebook
+PKG = pkg_jofacebook
 ZIPFILE = $(PKG)-$(VERSION2).zip
 UPDATEFILE = update_pkg.xml
 MKFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -23,7 +23,7 @@ NAMES = $(INSTALLS) $(EXTRAS)
 
 ZIPS = $(NAMES:=.zip)
 
-ZIPIGNORES = -x "*.git*" -x "*.svn*"
+ZIPIGNORES = -x "*.git*" -x -x Makefile -x "*.sh" 
 
 parts: $(ZIPS)
 
@@ -53,9 +53,6 @@ revertversions:
 fixsha:
 	@echo "Updating update xml files with checksums"
 	@(cd $(ROOT);./fixsha.sh $(ZIPFILE) $(UPDATEFILE))
-
-fixcopyrights:
-	@find . \( -name '*.php' -o -name '*.ini' -o -name '*.xml' \) -exec ./fixcopyrights.sh {} \;
 
 untabify:
 	@find . -name '*.php' -exec $(MKFILE_DIR)/replacetabs.sh {} \;

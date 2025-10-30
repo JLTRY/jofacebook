@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="5.0" method="upgrade">
 	<name>COM_JOFACEBOOK</name>
-	<creationDate>8th October, 2025</creationDate>
+	<creationDate>27th October, 2025</creationDate>
 	<author>Jean-Luc Tryoen</author>
 	<authorEmail>jltryoen@orange.fr</authorEmail>
 	<authorUrl>http://www.jltryoen.fr</authorUrl>
@@ -58,14 +58,14 @@
 
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB/en-GB.com_jofacebook.ini</language>
-        <language tag="en-GB">language/en-GB/en-GB.com_jofacebook.sys.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.com_jofacebook.sys.ini</language>
 	</languages>
 
 	<administration>
 		<menu>COM_JOFACEBOOK_MENU</menu>
 		<submenu>
 			<!-- Instead of link you can specify individual link attributes -->
-            <menu option="com_jofacebook" view="jofacebook">COM_JOFACEBOOK_MENU_DASHBOARD</menu>
+			<menu option="com_jofacebook" view="jofacebook">COM_JOFACEBOOK_MENU_DASHBOARD</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>access.xml</filename>
@@ -83,7 +83,7 @@
 
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_jofacebook.ini</language>
-            <language tag="en-GB">language/en-GB/en-GB.com_jofacebook.sys.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.com_jofacebook.sys.ini</language>
 		</languages>
 
 	</administration>

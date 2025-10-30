@@ -24,43 +24,43 @@ interface DeleteInterface
 {
 
 /***[JCBGUI.power.main_class_code.42.$$$$]***/
-    /**
-     * Set the current active table
-     *
-     * @param string|null $table The table that should be active
-     *
-     * @return self
-     * @since 3.2.2
-     */
-    public function table(?string $table): self;
+	/**
+	 * Set the current active table
+	 *
+	 * @param string|null $table The table that should be active
+	 *
+	 * @return self
+	 * @since 3.2.2
+	 */
+	public function table(?string $table): self;
 
-    /**
-     * Delete all items in the database that match these conditions
-     *
-     * @param   array    $conditions    Conditions by which to delete the data in database [array of arrays (key => value)]
-     *
-     * @return  bool
-     * @since   3.2.2
-     **/
-    public function items(array $conditions): bool;
+	/**
+	 * Delete all items in the database that match these conditions
+	 *
+	 * @param   array    $conditions    Conditions by which to delete the data in database [array of arrays (key => value)]
+	 *
+	 * @return  bool
+	 * @since   3.2.2
+	 **/
+	public function items(array $conditions): bool;
 
-    /**
-     * Truncate a table
-     *
-     * @param   string|null   $table    The table that should be truncated
-     *
-     * @return  void
-     * @since   3.2.2
-     **/
-    public function truncate(): void;
+	/**
+	 * Truncate a table
+	 *
+	 * @param   string|null   $table    The table that should be truncated
+	 *
+	 * @return  void
+	 * @since   3.2.2
+	 **/
+	public function truncate(): void;
 
-    /**
-     * Get the current active table
-     *
-     * @return  string
-     * @since 3.2.2
-     */
-    public function getTable(): string;/***[/JCBGUI$$$$]***/
+	/**
+	 * Get the current active table
+	 *
+	 * @return  string
+	 * @since 3.2.2
+	 */
+	public function getTable(): string;/***[/JCBGUI$$$$]***/
 
 }
 

@@ -30,23 +30,23 @@ interface FactoryInterface
 {
 
 /***[JCBGUI.power.main_class_code.8.$$$$]***/
-    /**
-     * Get any class from the container
-     *
-     * @param   string  $key  The container class key
-     *
-     * @return  Mixed
-     * @since 0.0.0
-     */
-    public static function _(string $key);
+	/**
+	 * Get any class from the container
+	 *
+	 * @param   string  $key  The container class key
+	 *
+	 * @return  Mixed
+	 * @since 0.0.0
+	 */
+	public static function _(string $key);
 
-    /**
-     * Get the global container
-     *
-     * @return  Container
-     * @since 0.0.0
-     */
-    public static function getContainer(): Container;/***[/JCBGUI$$$$]***/
+	/**
+	 * Get the global container
+	 *
+	 * @return  Container
+	 * @since 0.0.0
+	 */
+	public static function getContainer(): Container;/***[/JCBGUI$$$$]***/
 
 }
 
