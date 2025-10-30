@@ -24,7 +24,7 @@
     </languages>
 
     <updateservers>
-       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jofacebook/master/pkg_jofacebook/pkg_jofacebook-update_pkg.xml</server>
+       <server type="extension" priority="1" name="JO's Facebook updates">https://raw.githubusercontent.com/JLTRY/jofacebook/master/pkg_jofacebook/update_pkg.xml</server>
     </updateservers>
 
 </extension>
