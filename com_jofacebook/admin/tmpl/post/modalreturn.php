@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		modalreturn.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		modalreturn.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -23,16 +23,16 @@ use Joomla\CMS\Router\Route;
 // No direct access to this file
 defined('_JEXEC') or die;
 
-/** @var \JCB\Component\Jofacebook\Administrator\View\Post\HtmlView $this */
+/** @var \JLTRY\Component\Jofacebook\Administrator\View\Post\HtmlView $this */
 
 $icon = 'icon-check';
 $title_key = $this->item->id ?? '';
 $title_column = $this->item->name ?? '';
 $data = [
-	'contentType' => 'com_jofacebook.post',
-	'id' => $title_key,
-	'title' => $title_column,
-	'uri' => Route::_('index.php?option=com_jofacebook&layout=modal&tmpl=component&id='. (int) ($this->item->id ?? 0))
+    'contentType' => 'com_jofacebook.post',
+    'id' => $title_key,
+    'title' => $title_column,
+    'uri' => Route::_('index.php?option=com_jofacebook&layout=modal&tmpl=component&id='. (int) ($this->item->id ?? 0))
 ];
 
 // Add Content select script

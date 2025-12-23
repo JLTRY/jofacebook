@@ -1,4 +1,4 @@
-# jofacebook 1.0.0
+# jofacebook 1.0.2
 
 ## Quick Start
 
@@ -20,6 +20,9 @@ The package includes a component (helper), and 2 plugins
 
 ![Example of facebook post inserted!](jofacebook.jpg "Jo's Facebook Posts")
 
+## 2025-02-23 version 1.0.2
+
+rename prefix
 
 ## 2025-08-18 version 1.0.0
 

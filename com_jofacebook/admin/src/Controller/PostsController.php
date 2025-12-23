@@ -1,23 +1,23 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		PostsController.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		PostsController.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
 \____) (_____)(_____)(_/\/\_)(____)(__)(__)   \___)(_____)(_/\/\_)(__)  (_____)(_)\_)(____)(_)\_) (__) 
 
 /------------------------------------------------------------------------------------------------------*/
-namespace JCB\Component\Jofacebook\Administrator\Controller;
+namespace JLTRY\Component\Jofacebook\Administrator\Controller;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -25,9 +25,9 @@ use Joomla\CMS\MVC\Controller\AdminController;
 use Joomla\Utilities\ArrayHelper;
 use Joomla\CMS\Router\Route;
 use Joomla\CMS\Session\Session;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
-use JCB\Joomla\Utilities\ArrayHelper as UtilitiesArrayHelper;
-use JCB\Joomla\Utilities\ObjectHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Joomla\Utilities\ArrayHelper as UtilitiesArrayHelper;
+use JLTRY\Joomla\Utilities\ObjectHelper;
 
 // No direct access to this file
 \defined('_JEXEC') or die;
@@ -39,29 +39,29 @@ use JCB\Joomla\Utilities\ObjectHelper;
  */
 class PostsController extends AdminController
 {
-	/**
-	 * The prefix to use with controller messages.
-	 *
-	 * @var    string
-	 * @since  1.6
-	 */
-	protected $text_prefix = 'COM_JOFACEBOOK_POSTS';
+    /**
+     * The prefix to use with controller messages.
+     *
+     * @var    string
+     * @since  1.6
+     */
+    protected $text_prefix = 'COM_JOFACEBOOK_POSTS';
 
-	/**
-	 * Proxy for getModel.
-	 *
-	 * @param   string  $name    The model name. Optional.
-	 * @param   string  $prefix  The class prefix. Optional.
-	 * @param   array   $config  Configuration array for model. Optional.
-	 *
-	 * @return  \Joomla\CMS\MVC\Model\BaseDatabaseModel
-	 *
-	 * @since   1.6
-	 */
-	public function getModel($name = 'Post', $prefix = 'Administrator', $config = ['ignore_request' => true])
-	{
-		return parent::getModel($name, $prefix, $config);
-	}
+    /**
+     * Proxy for getModel.
+     *
+     * @param   string  $name    The model name. Optional.
+     * @param   string  $prefix  The class prefix. Optional.
+     * @param   array   $config  Configuration array for model. Optional.
+     *
+     * @return  \Joomla\CMS\MVC\Model\BaseDatabaseModel
+     *
+     * @since   1.6
+     */
+    public function getModel($name = 'Post', $prefix = 'Administrator', $config = ['ignore_request' => true])
+    {
+        return parent::getModel($name, $prefix, $config);
+    }
 
     public function exportData()
     {

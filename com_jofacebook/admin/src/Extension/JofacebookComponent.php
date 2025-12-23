@@ -1,23 +1,23 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		JofacebookComponent.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		JofacebookComponent.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
 \____) (_____)(_____)(_/\/\_)(____)(__)(__)   \___)(_____)(_/\/\_)(__)  (_____)(_)\_)(____)(_)\_) (__) 
 
 /------------------------------------------------------------------------------------------------------*/
-namespace JCB\Component\Jofacebook\Administrator\Extension;
+namespace JLTRY\Component\Jofacebook\Administrator\Extension;
 
 use Joomla\CMS\Association\AssociationServiceInterface;
 use Joomla\CMS\Association\AssociationServiceTrait;
@@ -35,7 +35,7 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Tag\TagServiceInterface;
 use Joomla\CMS\Tag\TagServiceTrait;
 use Joomla\CMS\User\UserFactoryInterface;
-// (soon) use JCB\Component\Jofacebook\Administrator\Service\HTML\AdministratorService;
+// (soon) use JLTRY\Component\Jofacebook\Administrator\Service\HTML\AdministratorService;
 use Psr\Container\ContainerInterface;
 
 // No direct access to this file
@@ -47,38 +47,38 @@ use Psr\Container\ContainerInterface;
  * @since  4.0
  */
 class JofacebookComponent extends MVCComponent implements
-	BootableExtensionInterface,
-	CategoryServiceInterface,
-	RouterServiceInterface
+    BootableExtensionInterface,
+    CategoryServiceInterface,
+    RouterServiceInterface
 {
-	use AssociationServiceTrait;
-	use HTMLRegistryAwareTrait;
-	use RouterServiceTrait;
-	use CategoryServiceTrait, TagServiceTrait {
-		CategoryServiceTrait::getTableNameForSection insteadof TagServiceTrait;
-		CategoryServiceTrait::getStateColumnForSection insteadof TagServiceTrait;
-	}
+    use AssociationServiceTrait;
+    use HTMLRegistryAwareTrait;
+    use RouterServiceTrait;
+    use CategoryServiceTrait, TagServiceTrait {
+        CategoryServiceTrait::getTableNameForSection insteadof TagServiceTrait;
+        CategoryServiceTrait::getStateColumnForSection insteadof TagServiceTrait;
+    }
 
-	/**
-	 * Booting the extension. This is the function to set up the environment of the extension like
-	 * registering new class loaders, etc.
-	 *
-	 * If required, some initial set up can be done from services of the container, eg.
-	 * registering HTML services.
-	 *
-	 * @param   ContainerInterface  $container  The container
-	 *
-	 * @return  void
-	 *
-	 * @since   4.0.0
-	 */
-	public function boot(ContainerInterface $container)
-	{
-		// (soon) $this->getRegistry()->register('jofacebookadministrator', new AdministratorService());
-	}
+    /**
+     * Booting the extension. This is the function to set up the environment of the extension like
+     * registering new class loaders, etc.
+     *
+     * If required, some initial set up can be done from services of the container, eg.
+     * registering HTML services.
+     *
+     * @param   ContainerInterface  $container  The container
+     *
+     * @return  void
+     *
+     * @since   4.0.0
+     */
+    public function boot(ContainerInterface $container)
+    {
+        // (soon) $this->getRegistry()->register('jofacebookadministrator', new AdministratorService());
+    }
 
-	// will fix these soon
-	protected function getTableNameForSection(string $section = null){}
-	public function countItems(array $items, string $section){}
+    // will fix these soon
+    protected function getTableNameForSection(?string $section = null){}
+    public function countItems(array $items, ?string $section){}
 
 }

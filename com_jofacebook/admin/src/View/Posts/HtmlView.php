@@ -1,23 +1,23 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		HtmlView.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		HtmlView.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
 \____) (_____)(_____)(_/\/\_)(____)(__)(__)   \___)(_____)(_/\/\_)(__)  (_____)(_)\_)(____)(_)\_) (__) 
 
 /------------------------------------------------------------------------------------------------------*/
-namespace JCB\Component\Jofacebook\Administrator\View\Posts;
+namespace JLTRY\Component\Jofacebook\Administrator\View\Posts;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -33,9 +33,10 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Document\Document;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
-use JCB\Joomla\Utilities\ArrayHelper;
-use JCB\Joomla\Utilities\StringHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Joomla\Jofacebook\Utilities\Permitted\Actions;
+use JLTRY\Joomla\Utilities\StringHelper;
+use Joomla\CMS\Toolbar\Button\DropdownButton;
 
 // No direct access to this file
 \defined('_JEXEC') or die;
@@ -48,105 +49,146 @@ use JCB\Joomla\Utilities\StringHelper;
 #[\AllowDynamicProperties]
 class HtmlView extends BaseHtmlView
 {
-	/**
-	 * The items from the model
-	 *
-	 * @var    mixed
-	 * @since  3.10.11
-	 */
-	public mixed $items;
+    /**
+     * The items from the model
+     *
+     * @var    mixed
+     * @since  3.10.11
+     */
+    public mixed $items;
 
-	/**
-	 * The state object
-	 *
-	 * @var    mixed
-	 * @since  3.10.11
-	 */
-	public mixed $state;
+    /**
+     * The state object
+     *
+     * @var    mixed
+     * @since  3.10.11
+     */
+    public mixed $state;
 
-	/**
-	 * The styles url array
-	 *
-	 * @var    array
-	 * @since  5.0.0
-	 */
-	protected array $styles;
+    /**
+     * The styles url array
+     *
+     * @var    array
+     * @since  5.0.0
+     */
+    protected array $styles;
 
-	/**
-	 * The scripts url array
-	 *
-	 * @var    array
-	 * @since  5.0.0
-	 */
-	protected array $scripts;
+    /**
+     * The scripts url array
+     *
+     * @var    array
+     * @since  5.0.0
+     */
+    protected array $scripts;
 
-	/**
-	 * The actions object
-	 *
-	 * @var    object
-	 * @since  3.10.11
-	 */
-	public object $canDo;
+    /**
+     * The actions object
+     *
+     * @var    object
+     * @since  3.10.11
+     */
+    public object $canDo;
 
-	/**
-	 * The return here base64 url
-	 *
-	 * @var    string
-	 * @since  3.10.11
-	 */
-	public string $return_here;
+    /**
+     * The return here base64 url
+     *
+     * @var    string
+     * @since  3.10.11
+     */
+    public string $return_here;
 
-	/**
-	 * The title key used in modal
-	 *
-	 * @var    string
-	 * @since  5.2.1
-	 */
-	public string $modalTitleKey;
+    /**
+     * The title key used in modal
+     *
+     * @var    string
+     * @since  5.2.1
+     */
+    public string $modalTitleKey;
 
-	/**
-	 * The modal state
-	 *
-	 * @var    bool
-	 * @since  5.2.1
-	 */
-	public bool $isModal;
+    /**
+     * The modal state
+     *
+     * @var    bool
+     * @since  5.2.1
+     */
+    public bool $isModal;
 
-	/**
-	 * The empty state
-	 *
-	 * @var    bool
-	 * @since  5.2.1
-	 */
-	protected bool $isEmptyState;
+    /**
+     * The empty state
+     *
+     * @var    bool
+     * @since  5.2.1
+     */
+    protected bool $isEmptyState;
 
-	/**
-	 * The user object.
-	 *
-	 * @var    User
-	 * @since  3.10.11
-	 */
-	public User $user;
+    /**
+     * The user object.
+     *
+     * @var    User
+     * @since  3.10.11
+     */
+    public User $user;
 
-	/**
-	 * Posts view display method
-	 *
-	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
-	 * @return  void
-	 * @throws \Exception
-	 * @since  1.6
-	 */
-	public function display($tpl = null): void
-	{
-		// Load module values
-		$model = $this->getModel();
-		$this->items = $model->getItems();
-		$this->pagination = $model->getPagination();
-		$this->state = $model->getState();
-		$this->styles = $model->getStyles();
-		$this->scripts = $model->getScripts();
-		$this->user ??= $this->getCurrentUser();
+    /**
+     * The Can Edit permission
+     *
+     * @var    ?bool
+     * @since  5.2.1
+     */
+    public ?bool $canEdit = null;
+
+    /**
+     * The Can Edit State permission
+     *
+     * @var    ?bool
+     * @since  5.2.1
+     */
+    public ?bool $canState = null;
+
+    /**
+     * The Can Create permission
+     *
+     * @var    ?bool
+     * @since  5.2.1
+     */
+    public ?bool $canCreate = null;
+
+    /**
+     * The Can Delete permission
+     *
+     * @var    ?bool
+     * @since  5.2.1
+     */
+    public ?bool $canDelete = null;
+
+    /**
+     * The Can Batch permission
+     *
+     * @var    ?bool
+     * @since  5.2.1
+     */
+    public ?bool $canBatch = null;
+
+    /**
+     * Posts view display method
+     *
+     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     *
+     * @return  void
+     * @throws \Exception
+     * @since  1.6
+     */
+    public function display($tpl = null): void
+    {
+        // Load module values
+        $model = $this->getModel();
+        $this->items = $model->getItems();
+        $this->pagination = $model->getPagination();
+        $this->state = $model->getState();
+        $this->isEmptyState = $model->getIsEmptyState();
+        $this->styles = $model->getStyles();
+        $this->scripts = $model->getScripts();
+        $this->user ??= $this->getCurrentUser();
         // Load the filter form from xml for searchtools.
         $this->filterForm = $model->getFilterForm();
         // Load the active filters for searchtools.
@@ -154,168 +196,182 @@ class HtmlView extends BaseHtmlView
         // Add the list ordering clause.
         $this->listOrder = $this->escape($this->state->get('list.ordering', 'a.id'));
         $this->listDirn = $this->escape($this->state->get('list.direction', 'DESC'));
-		$this->saveOrder = $this->listOrder == 'a.ordering';
-		// set the return here value
-		$this->return_here = urlencode(base64_encode((string) Uri::getInstance()));
-		// get global action permissions
-		$this->canDo = JofacebookHelper::getActions('post');
+        $this->saveOrder = $this->listOrder == 'a.ordering';
+        // set the return here value
+        $this->return_here = urlencode(base64_encode((string) Uri::getInstance()));
+        // get the permitted actions the current user can do
+        $this->canDo = Actions::get('post');
         $this->canEdit = $this->canDo->get('core.edit');
         $this->canState = $this->canDo->get('core.edit.state');
         $this->canCreate = $this->canDo->get('core.create');
         $this->canDelete = $this->canDo->get('core.delete');
         $this->canBatch = ($this->canDo->get('post.batch') && $this->canDo->get('core.batch'));
 
-		// If we don't have items we load the empty state
-		if (is_array($this->items) && !count((array) $this->items) && $this->isEmptyState = $model->getIsEmptyState())
-		{
-			$this->setLayout('emptystate');
-		}
+        // If we don't have items we load the empty state
+        if (is_array($this->items) && !count((array) $this->items) && $this->isEmptyState)
+        {
+            $this->setLayout('emptystate');
+        }
 
-		// We don't need toolbar in the modal window.
-		$this->isModal = true;
-		if ($this->getLayout() !== 'modal')
-		{
-			$this->isModal = false;
-			$this->addToolbar();
-		}
+        // We don't need toolbar in the modal window.
+        $this->isModal = true;
+        if ($this->getLayout() !== 'modal')
+        {
+            $this->isModal = false;
+            $this->addToolbar();
+        }
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			throw new \Exception(implode("\n", $errors), 500);
-		}
+        // Check for errors.
+        if (count($errors = $this->get('Errors')))
+        {
+            throw new \Exception(implode("\n", $errors), 500);
+        }
 
-		// Set the html view document stuff
-		$this->_prepareDocument();
+        // Set the html view document stuff
+        $this->_prepareDocument();
 
-		// Display the template
-		parent::display($tpl);
-	}
+        // Display the template
+        parent::display($tpl);
+    }
 
-	/**
-	 * Add the page title and toolbar.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function addToolbar(): void
-	{
-		ToolbarHelper::title(Text::_('COM_JOFACEBOOK_POSTS'), 'joomla');
+    /**
+     * Add the page title and toolbar.
+     *
+     * @return  void
+     * @throws  \Exception
+     * @since   1.6
+     */
+    protected function addToolbar(): void
+    {
+        ToolbarHelper::title(Text::_('COM_JOFACEBOOK_POSTS'), 'joomla');
+        /** @var  Toolbar $toolbar */
+        $toolbar = $this->getDocument()->getToolbar();
+        if ($this->canCreate)
+        {
+            $toolbar->addNew('post.add');
+        }
 
-		if ($this->canCreate)
-		{
-			ToolbarHelper::addNew('post.add');
-		}
+        // Only load if there are items
+        if (!$this->isEmptyState)
+        {
+            /** @var  DropdownButton $dropdown */
+            $dropdown = $toolbar->dropdownButton('status-group')
+                ->text('JTOOLBAR_CHANGE_STATUS')
+                ->toggleSplit(false)
+                ->icon('icon-ellipsis-h')
+                ->buttonClass('btn btn-action')
+                ->listCheck(true);
 
-		// Only load if there are items
-		if (ArrayHelper::check($this->items))
-		{
-			if ($this->canEdit)
-			{
-				ToolbarHelper::editList('post.edit');
-			}
+            $childBar = $dropdown->getChildToolbar();
 
-			if ($this->canState)
-			{
-				ToolbarHelper::publishList('posts.publish');
-				ToolbarHelper::unpublishList('posts.unpublish');
-				ToolbarHelper::archiveList('posts.archive');
+            if ($this->canEdit)
+            {
+                $childBar->edit('post.edit')->listCheck(true);
+            }
 
-				if ($this->canDo->get('core.admin'))
-				{
-					ToolbarHelper::checkin('posts.checkin');
-				}
-			}
+            if ($this->canState)
+            {
+                $childBar->publish('posts.publish')->listCheck(true);
+                $childBar->unpublish('posts.unpublish')->listCheck(true);
+                $childBar->archive('posts.archive')->listCheck(true);
 
-			if ($this->state->get('filter.published') == -2 && ($this->canState && $this->canDelete))
-			{
-				ToolbarHelper::deleteList('', 'posts.delete', 'JTOOLBAR_EMPTY_TRASH');
-			}
-			elseif ($this->canState && $this->canDelete)
-			{
-				ToolbarHelper::trash('posts.trash');
-			}
-		}
+                if ($this->canDo->get('core.admin'))
+                {
+                    $childBar->checkin('posts.checkin')->listCheck(true);
+                }
 
-		// set help url for this view if found
-		$this->help_url = JofacebookHelper::getHelpUrl('posts');
-		if (StringHelper::check($this->help_url))
-		{
-			ToolbarHelper::help('COM_JOFACEBOOK_HELP_MANAGER', false, $this->help_url);
-		}
+                if ($this->state->get('filter.published') == -2 && $this->canDelete)
+                {
+                    $toolbar->delete('posts.delete', 'JTOOLBAR_DELETE_FROM_TRASH')
+                        ->message('JGLOBAL_CONFIRM_DELETE')
+                        ->listCheck(true);
+                }
+                elseif ($this->canDelete)
+                {
+                    $childBar->trash('posts.trash')->listCheck(true);
+                }
+            }
+        }
 
-		// add the options comp button
-		if ($this->canDo->get('core.admin') || $this->canDo->get('core.options'))
-		{
-			ToolbarHelper::preferences('com_jofacebook');
-		}
-	}
+        // set help url for this view if found
+        $this->help_url = JofacebookHelper::getHelpUrl('posts');
+        if (StringHelper::check($this->help_url))
+        {
+            $toolbar->help('COM_JOFACEBOOK_HELP_MANAGER', false, $this->help_url);
+        }
 
-	/**
-	 * Prepare some document related stuff.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function _prepareDocument(): void
-	{
+        // add the options comp button
+        if ($this->canDo->get('core.admin') || $this->canDo->get('core.options'))
+        {
+            $toolbar->preferences('com_jofacebook');
+        }
+    }
+
+    /**
+     * Prepare some document related stuff.
+     *
+     * @return  void
+     * @since   1.6
+     */
+    protected function _prepareDocument(): void
+    {
         // Load jQuery
         Html::_('jquery.framework');
-		// add styles
-		foreach ($this->styles as $style)
-		{
-			Html::_('stylesheet', $style, ['version' => 'auto']);
-		}
-		// add scripts
-		foreach ($this->scripts as $script)
-		{
-			Html::_('script', $script, ['version' => 'auto']);
-		}
-	}
+        // add styles
+        foreach ($this->styles as $style)
+        {
+            Html::_('stylesheet', $style, ['version' => 'auto']);
+        }
+        // add scripts
+        foreach ($this->scripts as $script)
+        {
+            Html::_('script', $script, ['version' => 'auto']);
+        }
+    }
 
-	/**
-	 * Escapes a value for output in a view script.
-	 *
-	 * @param   mixed  $var     The output to escape.
-	 * @param   bool   $shorten The switch to shorten.
-	 * @param   int    $length  The shorting length.
-	 *
-	 * @return  mixed  The escaped value.
-	 * @since   1.6
-	 */
-	public function escape($var, bool $shorten = true, int $length = 50)
-	{
-		if (!is_string($var))
-		{
-			return $var;
-		}
+    /**
+     * Escapes a value for output in a view script.
+     *
+     * @param   mixed  $var     The output to escape.
+     * @param   bool   $shorten The switch to shorten.
+     * @param   int    $length  The shorting length.
+     *
+     * @return  mixed  The escaped value.
+     * @since   1.6
+     */
+    public function escape($var, bool $shorten = true, int $length = 50)
+    {
+        if (!is_string($var))
+        {
+            return $var;
+        }
 
-		return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
-	}
+        return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
+    }
 
-	/**
-	 * Get the modal data/title key
-	 *
-	 * @return  string  The key value.
-	 * @since   5.2.1
-	 */
-	public function getModalTitleKey(): string
-	{
-		return $this->modalTitleKey ?? 'id';
-	}
+    /**
+     * Get the modal data/title key
+     *
+     * @return  string  The key value.
+     * @since   5.2.1
+     */
+    public function getModalTitleKey(): string
+    {
+        return $this->modalTitleKey ?? 'id';
+    }
 
-	/**
-	 * Returns an array of fields the table can be sorted by
-	 *
-	 * @return  array   containing the field name to sort by as the key and display text as value
-	 * @since   1.6
-	 */
-	protected function getSortFields()
-	{
-		return array(
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array   containing the field name to sort by as the key and display text as value
+     * @since   1.6
+     */
+    protected function getSortFields()
+    {
+        return array(
             'a.ordering' => Text::_('JGRID_HEADING_ORDERING'),
             'a.published' => Text::_('JSTATUS'),
             'a.id' => Text::_('JGRID_HEADING_ID')
         );
-	}
+    }
 }

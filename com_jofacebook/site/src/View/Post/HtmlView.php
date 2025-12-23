@@ -1,23 +1,23 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		HtmlView.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		HtmlView.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
 \____) (_____)(_____)(_/\/\_)(____)(__)(__)   \___)(_____)(_/\/\_)(__)  (_____)(_)\_)(____)(_)\_) (__) 
 
 /------------------------------------------------------------------------------------------------------*/
-namespace JCB\Component\Jofacebook\Site\View\Post;
+namespace JLTRY\Component\Jofacebook\Site\View\Post;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -33,8 +33,9 @@ use Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\Document\Document;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
-use JCB\Joomla\Utilities\StringHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Joomla\Jofacebook\Utilities\Permitted\Actions;
+use JLTRY\Joomla\Utilities\StringHelper;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\Input\Input;
 use Joomla\Registry\Registry;
@@ -49,186 +50,230 @@ use Joomla\Registry\Registry;
  */
 class HtmlView extends BaseHtmlView
 {
-	/**
-	 * The app class
-	 *
-	 * @var    CMSApplicationInterface
-	 * @since  5.2.1
-	 */
-	public CMSApplicationInterface $app;
+    /**
+     * The app class
+     *
+     * @var    CMSApplicationInterface
+     * @since  5.2.1
+     */
+    public CMSApplicationInterface $app;
 
-	/**
-	 * The input class
-	 *
-	 * @var    Input
-	 * @since  5.2.1
-	 */
-	public Input $input;
+    /**
+     * The input class
+     *
+     * @var    Input
+     * @since  5.2.1
+     */
+    public Input $input;
 
-	/**
-	 * The params registry
-	 *
-	 * @var    Registry
-	 * @since  5.2.1
-	 */
-	public Registry $params;
+    /**
+     * The params registry
+     *
+     * @var    Registry
+     * @since  5.2.1
+     */
+    public Registry $params;
 
-	/**
-	 * The item from the model
-	 *
-	 * @var    mixed
-	 * @since  3.10.11
-	 */
-	public mixed $item;
+    /**
+     * The item from the model
+     *
+     * @var    mixed
+     * @since  3.10.11
+     */
+    public mixed $item;
 
-	/**
-	 * The state object
-	 *
-	 * @var    mixed
-	 * @since  3.10.11
-	 */
-	public mixed $state;
+    /**
+     * The state object
+     *
+     * @var    mixed
+     * @since  3.10.11
+     */
+    public mixed $state;
 
-	/**
-	 * The form from the model
-	 *
-	 * @var    mixed
-	 * @since  3.10.11
-	 */
-	public mixed $form;
+    /**
+     * The form from the model
+     *
+     * @var    mixed
+     * @since  3.10.11
+     */
+    public mixed $form;
 
-	/**
-	 * The toolbar object
-	 *
-	 * @var    Toolbar
-	 * @since  3.10.11
-	 */
-	public Toolbar $toolbar;
+    /**
+     * The toolbar object
+     *
+     * @var    Toolbar
+     * @since  3.10.11
+     */
+    public Toolbar $toolbar;
 
-	/**
-	 * The styles url array
-	 *
-	 * @var    array
-	 * @since  5.0.0
-	 */
-	protected array $styles;
+    /**
+     * The styles url array
+     *
+     * @var    array
+     * @since  5.0.0
+     */
+    protected array $styles;
 
-	/**
-	 * The scripts url array
-	 *
-	 * @var    array
-	 * @since  5.0.0
-	 */
-	protected array $scripts;
+    /**
+     * The scripts url array
+     *
+     * @var    array
+     * @since  5.0.0
+     */
+    protected array $scripts;
 
-	/**
-	 * The actions object
-	 *
-	 * @var    object
-	 * @since  3.10.11
-	 */
-	public object $canDo;
+    /**
+     * The actions object
+     *
+     * @var    object
+     * @since  3.10.11
+     */
+    public object $canDo;
 
-	/**
-	 * The origin referral view name
-	 *
-	 * @var    string
-	 * @since  3.10.11
-	 */
-	public string $ref;
+    /**
+     * The origin referral view name
+     *
+     * @var    string|null
+     * @since  3.10.11
+     */
+    public ?string $ref;
 
-	/**
-	 * The origin referral view item id
-	 *
-	 * @var    int
-	 * @since  3.10.11
-	 */
-	public int $refid;
+    /**
+     * The origin referral view item id
+     *
+     * @var    int|null
+     * @since  3.10.11
+     */
+    public ?int $refid;
 
-	/**
-	 * The referral url suffix values
-	 *
-	 * @var    string
-	 * @since  3.10.11
-	 */
-	public string $referral;
+    /**
+     * The referral url suffix values
+     *
+     * @var    string
+     * @since  3.10.11
+     */
+    public string $referral;
 
-	/**
-	 * Post view display method
-	 *
-	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
-	 * @return  void
-	 * @since  1.6
-	 */
-	public function display($tpl = null)
-	{
-		// get the application
-		$this->app ??= Factory::getApplication();
-		// get input
-		$this->input ??= method_exists($this->app, 'getInput') ? $this->app->getInput() : $this->app->input;
-		// get component params
-		$this->params ??= method_exists($this->app, 'getParams')
-			? $this->app->getParams()
-			: ComponentHelper::getParams('com_jofacebook');
-		$this->useCoreUI = true;
-		// Load module values
-		$model = $this->getModel();
-		$this->form ??= $model->getForm();
-		$this->item = $model->getItem();
-		$this->state = $model->getState();
-		$this->styles = $model->getStyles() ?? [];
-		$this->scripts = $model->getScripts() ?? [];
-		// get action permissions
-		$this->canDo = JofacebookHelper::getActions('post', $this->item);
-		// get return referral details
-		$this->ref = $this->input->get('ref', 0, 'word');
-		$this->refid = $this->input->get('refid', 0, 'int');
-		$return = $this->input->get('return', null, 'base64');
-		// set the referral string
-		$this->referral = '';
-		if ($this->refid && $this->ref)
-		{
-			// return to the item that referred to this item
-			$this->referral = '&ref=' . (string) $this->ref . '&refid=' . (int) $this->refid;
-		}
-		elseif($this->ref)
-		{
-			// return to the list view that referred to this item
-			$this->referral = '&ref=' . (string) $this->ref;
-		}
-		// check return value
-		if (!is_null($return))
-		{
-			// add the return value
-			$this->referral .= '&return=' . (string) $return;
-		}
+    /**
+     * The modal state
+     *
+     * @var    bool
+     * @since  5.2.1
+     */
+    public bool $isModal;
 
-		// Set the toolbar
-		$this->addToolBar();
+    /**
+     * Constructor
+     *
+     * @param   array  $config  An optional associative array of configuration settings.
+     *
+     * @since   6.0.0
+     */
+    public function __construct(array $config)
+    {
+        if (empty($config['option']))
+        {
+            $config['option'] = 'com_jofacebook';
+        }
 
-		// Check for errors.
-		if (count($errors = $this->get('Errors')))
-		{
-			throw new \Exception(implode("\n", $errors), 500);
-		}
+        parent::__construct($config);
 
-		// Set the html view document stuff
-		$this->_prepareDocument();
+        // get the application
+        $this->app ??= Factory::getApplication();
+        // get input
+        $this->input ??= method_exists($this->app, 'getInput') ? $this->app->getInput() : $this->app->input;
+        // get component params
+        $this->params ??= method_exists($this->app, 'getParams')
+            ? $this->app->getParams()
+            : ComponentHelper::getParams('com_jofacebook');
 
-		// Display the template
-		parent::display($tpl);
-	}
+        $this->useCoreUI = true;
+        $this->isModal = false; // no modal support yet
+    }
 
-	/**
-	 * Add the page title and toolbar.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function addToolbar(): void
-	{
-		$this->input->set('hidemainmenu', true);
+    /**
+     * Post view display method
+     *
+     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     *
+     * @return void
+     * @since  1.6
+     */
+    public function display($tpl = null)
+    {
+        // Load module values
+        $model = $this->getModel();
+        $this->form ??= $model->getForm();
+        $this->item = $model->getItem();
+        $this->state = $model->getState();
+        $this->styles = $model->getStyles() ?? [];
+        $this->scripts = $model->getScripts() ?? [];
+
+        // get the permitted actions the current user can do.
+        $this->canDo = Actions::get('post', $this->item);
+
+        // Set the return
+        $this->setReturn();
+
+        // Set the toolbar
+        $this->addToolBar();
+
+        // Check for errors.
+        if (count($errors = $this->get('Errors')))
+        {
+            throw new \Exception(implode("\n", $errors), 500);
+        }
+
+        // Set the html view document stuff
+        $this->_prepareDocument();
+
+        // Display the template
+        parent::display($tpl);
+    }
+
+    /**
+     * Set the redirection details.
+     *
+     * @return  void
+     * @since   5.1.4
+     */
+    protected function setReturn(): void
+    {
+        // This [ref,refid] will be removed in JCB.v7, use only [return]
+        $this->ref = $this->input->getWord('ref', null);
+        $this->refid = $this->input->getInt('refid', null);
+        $this->referral = '';
+        if (!empty($this->refid) && !empty($this->ref))
+        {
+            // return to the item that referred to this item
+            $this->referral = '&ref=' . (string) $this->ref . '&refid=' . (int) $this->refid;
+        }
+        elseif (!empty($this->ref))
+        {
+            // return to the list view that referred to this item
+            $this->referral = '&ref=' . (string) $this->ref;
+        }
+
+        $return = $this->input->getBase64('return', null);
+        if (!empty($return))
+        {
+            $this->referral .= '&return=' . (string) $return;
+        }
+    }
+
+    /**
+     * Add the page title and toolbar.
+     *
+     * @return  void
+     * @throws  \Exception
+     * @since   1.6
+     */
+    protected function addToolbar(): void
+    {
+        // Initialize the toolbar only if it hasn't been initialized yet.
+        $this->toolbar ??= $this->getDocument()->getToolbar();
+
+        $this->input->set('hidemainmenu', true);
         $user = $this->getCurrentUser();
         $userId = $user->id;
         $isNew = $this->item->id == 0;
@@ -249,7 +294,7 @@ class HtmlView extends BaseHtmlView
             }
             if ($isNew)
             {
-                // Do not creat but cancel.
+                // Do not create but cancel.
                 ToolbarHelper::cancel('post.cancel', 'JTOOLBAR_CANCEL');
             }
             else
@@ -305,52 +350,49 @@ class HtmlView extends BaseHtmlView
         {
             ToolbarHelper::help('COM_JOFACEBOOK_HELP_MANAGER', false, $this->help_url);
         }
+    }
 
-		// add the toolbar if it's not already loaded
-		$this->toolbar ??= $this->getDocument()->getToolbar();
-	}
-
-	/**
-	 * Prepare some document related stuff.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function _prepareDocument(): void
-	{
+    /**
+     * Prepare some document related stuff.
+     *
+     * @return  void
+     * @since   1.6
+     */
+    protected function _prepareDocument(): void
+    {
         // Load jQuery
         Html::_('jquery.framework');
-		$isNew = ($this->item->id < 1);
-		$this->setDocumentTitle(Text::_($isNew ? 'COM_JOFACEBOOK_POST_NEW' : 'COM_JOFACEBOOK_POST_EDIT'));
-		// add styles
-		foreach ($this->styles as $style)
-		{
-			Html::_('stylesheet', $style, ['version' => 'auto']);
-		}
-		// add scripts
-		foreach ($this->scripts as $script)
-		{
-			Html::_('script', $script, ['version' => 'auto']);
-		}
-	}
+        $isNew = ($this->item->id < 1);
+        $this->setDocumentTitle(Text::_($isNew ? 'COM_JOFACEBOOK_POST_NEW' : 'COM_JOFACEBOOK_POST_EDIT'));
+        // add styles
+        foreach ($this->styles as $style)
+        {
+            Html::_('stylesheet', $style, ['version' => 'auto']);
+        }
+        // add scripts
+        foreach ($this->scripts as $script)
+        {
+            Html::_('script', $script, ['version' => 'auto']);
+        }
+    }
 
-	/**
-	 * Escapes a value for output in a view script.
-	 *
-	 * @param   mixed  $var     The output to escape.
-	 * @param   bool   $shorten The switch to shorten.
-	 * @param   int    $length  The shorting length.
-	 *
-	 * @return  mixed  The escaped value.
-	 * @since   1.6
-	 */
-	public function escape($var, bool $shorten = true, int $length = 30)
-	{
-		if (!is_string($var))
-		{
-			return $var;
-		}
+    /**
+     * Escapes a value for output in a view script.
+     *
+     * @param   mixed  $var     The output to escape.
+     * @param   bool   $shorten The switch to shorten.
+     * @param   int    $length  The shorting length.
+     *
+     * @return  mixed  The escaped value.
+     * @since   1.6
+     */
+    public function escape($var, bool $shorten = true, int $length = 30)
+    {
+        if (!is_string($var))
+        {
+            return $var;
+        }
 
-		return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
-	}
+        return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
+    }
 }

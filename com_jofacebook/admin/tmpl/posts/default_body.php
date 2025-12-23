@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		default_body.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		default_body.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -21,7 +21,8 @@
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper as Html;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Joomla\Jofacebook\Utilities\Permitted\Actions;
 use Joomla\CMS\User\UserFactoryInterface;
 
 // No direct access to this file
@@ -35,8 +36,8 @@ $edit = "index.php?option=com_jofacebook&view=posts&task=post.edit";
         $canCheckin = $this->user->authorise('core.manage', 'com_checkin') || $item->checked_out == $this->user->id || $item->checked_out == 0;
         $userChkOut = Factory::getContainer()->
             get(UserFactoryInterface::class)->
-                loadUserById($item->checked_out ?? 0);
-        $canDo = JofacebookHelper::getActions('post',$item,'posts');
+                loadUserById((int) ($item->checked_out ?? 0));
+        $canDo = Actions::get('post', $item, 'posts');
     ?>
     <tr class="row<?php echo $i % 2; ?>">
         <td class="order nowrap center hidden-phone">

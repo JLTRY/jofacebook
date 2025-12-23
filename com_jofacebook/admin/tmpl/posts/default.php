@@ -1,16 +1,16 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		default.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		default.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
@@ -23,15 +23,15 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\HTML\HTMLHelper as Html;
 use Joomla\CMS\Layout\LayoutHelper;
 use Joomla\CMS\Router\Route;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
 
 // No direct access to this file
 defined('_JEXEC') or die;
 
 if ($this->saveOrder)
 {
-	$saveOrderingUrl = 'index.php?option=com_jofacebook&task=posts.saveOrderAjax&tmpl=component';
-	Html::_('sortablelist.sortable', 'postList', 'adminForm', strtolower($this->listDirn), $saveOrderingUrl);
+    $saveOrderingUrl = 'index.php?option=com_jofacebook&task=posts.saveOrderAjax&tmpl=component';
+    Html::_('sortablelist.sortable', 'postList', 'adminForm', strtolower($this->listDirn), $saveOrderingUrl);
 }
 ?>
 <form action="<?php echo Route::_('index.php?option=com_jofacebook&view=posts'); ?>" method="post" name="adminForm" id="adminForm">

@@ -1,23 +1,23 @@
 <?php
 /*----------------------------------------------------------------------------------|  www.vdm.io  |----/
-				JL Tryoen 
+                JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-	@version		1.0.4
-	@build			8th October, 2025
-	@created		12th August, 2025
-	@package		JOFacebook
-	@subpackage		HtmlView.php
-	@author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
-	@copyright		Copyright (C) 2025. All Rights Reserved
-	@license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
+    @version		1.0.5
+    @build			23rd December, 2025
+    @created		12th August, 2025
+    @package		JOFacebook
+    @subpackage		HtmlView.php
+    @author			Jean-Luc Tryoen <http://www.jltryoen.fr>	
+    @copyright		Copyright (C) 2025. All Rights Reserved
+    @license		GNU/GPL Version 2 or later - http://www.gnu.org/licenses/gpl-2.0.html
   ____  _____  _____  __  __  __      __       ___  _____  __  __  ____  _____  _  _  ____  _  _  ____ 
  (_  _)(  _  )(  _  )(  \/  )(  )    /__\     / __)(  _  )(  \/  )(  _ \(  _  )( \( )( ___)( \( )(_  _)
 .-_)(   )(_)(  )(_)(  )    (  )(__  /(__)\   ( (__  )(_)(  )    (  )___/ )(_)(  )  (  )__)  )  (   )(  
 \____) (_____)(_____)(_/\/\_)(____)(__)(__)   \___)(_____)(_/\/\_)(__)  (_____)(_)\_)(____)(_)\_) (__) 
 
 /------------------------------------------------------------------------------------------------------*/
-namespace JCB\Component\Jofacebook\Administrator\View\Facebookpost;
+namespace JLTRY\Component\Jofacebook\Administrator\View\Facebookpost;
 
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
@@ -29,12 +29,14 @@ use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Toolbar\ToolbarHelper;
 use Joomla\CMS\User\User;
 use Joomla\CMS\Document\Document;
-use JCB\Component\Jofacebook\Administrator\Helper\HeaderCheck;
-use JCB\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
-use JCB\Joomla\Utilities\StringHelper;
+use JLTRY\Component\Jofacebook\Administrator\Helper\HeaderCheck;
+use JLTRY\Component\Jofacebook\Administrator\Helper\JofacebookHelper;
+use JLTRY\Joomla\Jofacebook\Utilities\Permitted\Actions;
+use JLTRY\Joomla\Utilities\StringHelper;
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\Input\Input;
 use Joomla\Registry\Registry;
+use Joomla\CMS\Toolbar\Toolbar;
 
 // No direct access to this file
 \defined('_JEXEC') or die; 
@@ -47,81 +49,91 @@ use Joomla\Registry\Registry;
 #[\AllowDynamicProperties]
 class HtmlView extends BaseHtmlView
 {
-	/**
-	 * The app class
-	 *
-	 * @var    CMSApplicationInterface
-	 * @since  5.2.1
-	 */
-	public CMSApplicationInterface $app;
+    /**
+     * The app class
+     *
+     * @var    CMSApplicationInterface
+     * @since  5.2.1
+     */
+    public CMSApplicationInterface $app;
 
-	/**
-	 * The input class
-	 *
-	 * @var    Input
-	 * @since  5.2.1
-	 */
-	public Input $input;
+    /**
+     * The input class
+     *
+     * @var    Input
+     * @since  5.2.1
+     */
+    public Input $input;
 
-	/**
-	 * The params registry
-	 *
-	 * @var    Registry
-	 * @since  5.2.1
-	 */
-	public Registry $params;
+    /**
+     * The params registry
+     *
+     * @var    Registry
+     * @since  5.2.1
+     */
+    public Registry $params;
 
-	/**
-	 * The user object.
-	 *
-	 * @var    User
-	 * @since  3.10.11
-	 */
-	public User $user;
+    /**
+     * The user object.
+     *
+     * @var    User
+     * @since  3.10.11
+     */
+    public User $user;
 
-	/**
-	 * The styles url array
-	 *
-	 * @var    array
-	 * @since  3.10.11
-	 */
-	protected array $styles;
+    /**
+     * The styles url array
+     *
+     * @var    array
+     * @since  3.10.11
+     */
+    protected array $styles;
 
-	/**
-	 * The scripts url array
-	 *
-	 * @var    array
-	 * @since  3.10.11
-	 */
-	protected array $scripts;
+    /**
+     * The scripts url array
+     *
+     * @var    array
+     * @since  3.10.11
+     */
+    protected array $scripts;
 
-	/**
-	 * Display the view
-	 *
-	 * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-	 *
-	 * @return  void
-	 * @throws \Exception
-	 * @since  1.6
-	 */
-	public function display($tpl = null): void
-	{
-		// get the application
-		$this->app ??= Factory::getApplication();
-		// get input
-		$this->input ??= method_exists($this->app, 'getInput') ? $this->app->getInput() : $this->app->input;
-		// get component params
-		$this->params ??= method_exists($this->app, 'getParams')
-			? $this->app->getParams()
-			: ComponentHelper::getParams('com_jofacebook');
-		// get the user object
-		$this->user ??= $this->getCurrentUser();
-		// get global action permissions
-		$this->canDo = JofacebookHelper::getActions('facebookpost');
-		// Load module values
-		$model = $this->getModel();
-		$this->styles = $model->getStyles();
-		$this->scripts = $model->getScripts();
+    /**
+     * The actions object
+     *
+     * @var    object
+     * @since  3.10.11
+     */
+    public object $canDo;
+
+    /**
+     * Display the view
+     *
+     * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
+     *
+     * @return  void
+     * @throws \Exception
+     * @since  1.6
+     */
+    public function display($tpl = null): void
+    {
+        // get the application
+        $this->app ??= Factory::getApplication();
+        // get input
+        $this->input ??= method_exists($this->app, 'getInput') ? $this->app->getInput() : $this->app->input;
+        // get component params
+        $this->params ??= method_exists($this->app, 'getParams')
+            ? $this->app->getParams()
+            : ComponentHelper::getParams('com_jofacebook');
+        // get the user object
+        $this->user ??= $this->getCurrentUser();
+
+        // get the permitted actions the current user can do.
+        $this->canDo = Actions::get('facebookpost');
+
+        // Load module values
+        $model = $this->getModel();
+        $this->styles = $model->getStyles();
+        $this->scripts = $model->getScripts();
         // Initialise variables.
         $this->item = $model->getItem();
         
@@ -146,59 +158,64 @@ class HtmlView extends BaseHtmlView
             throw new \Exception(implode(PHP_EOL, $errors), 500);
         }
 
-		// Set the html view document stuff
-		$this->_prepareDocument();
+        // Set the html view document stuff
+        $this->_prepareDocument();
 
-		parent::display($tpl);
-	}
+        parent::display($tpl);
+    }
 
-	/**
-	 * Add the page title and toolbar.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function addToolbar(): void
-	{
-        // hide the main menu
+    /**
+     * Add the page title and toolbar.
+     *
+     * @return  void
+     * @throws  \Exception
+     * @since   1.6
+     */
+    protected function addToolbar(): void
+    {
         $this->input->set('hidemainmenu', true);
-		// set the title
-		if (isset($this->item->name) && $this->item->name)
-		{
-			$title = $this->item->name;
-		}
-		// Check for empty title and add view name if param is set
-		if (empty($title))
-		{
-			$title = Text::_('COM_JOFACEBOOK_FACEBOOKPOST');
-		}
-		// add title to the page
-		ToolbarHelper::title($title,'joomla');
+
+        /** @var Toolbar $toolbar */
+        $toolbar = $this->getDocument()->getToolbar();
+
+        // set the title
+        if (!empty($this->item->name))
+        {
+            $title = $this->item->name;
+        }
+
+        // check for empty title to add the view name
+        if (empty($title))
+        {
+            $title = Text::_('COM_JOFACEBOOK_FACEBOOKPOST');
+        }
+
+        // add title to the page
+        ToolbarHelper::title($title, 'joomla');
         // add cpanel button
         ToolbarHelper::custom('facebookpost.dashboard', 'grid-2', '', 'COM_JOFACEBOOK_DASH', false);
+        // set help url for this view if found
+        $this->help_url = JofacebookHelper::getHelpUrl('facebookpost');
+        if (StringHelper::check($this->help_url))
+        {
+            $toolbar->help('COM_JOFACEBOOK_HELP_MANAGER', false, $this->help_url);
+        }
 
-		// set help url for this view if found
-		$this->help_url = JofacebookHelper::getHelpUrl('facebookpost');
-		if (StringHelper::check($this->help_url))
-		{
-			ToolbarHelper::help('COM_JOFACEBOOK_HELP_MANAGER', false, $this->help_url);
-		}
+        // add the options comp button
+        if ($this->canDo->get('core.admin') || $this->canDo->get('core.options'))
+        {
+            $toolbar->preferences('com_jofacebook');
+        }
+    }
 
-		// add the options comp button
-		if ($this->canDo->get('core.admin') || $this->canDo->get('core.options'))
-		{
-			ToolbarHelper::preferences('com_jofacebook');
-		}
-	}
-
-	/**
-	 * Prepare some document related stuff.
-	 *
-	 * @return  void
-	 * @since   1.6
-	 */
-	protected function _prepareDocument(): void
-	{
+    /**
+     * Prepare some document related stuff.
+     *
+     * @return  void
+     * @since   1.6
+     */
+    protected function _prepareDocument(): void
+    {
 
         // Only load jQuery if needed. (default is true)
         if ($this->params->get('add_jquery_framework', 1) == 1)
@@ -211,16 +228,16 @@ class HtmlView extends BaseHtmlView
 
         // Add View JavaScript File
         Html::_('script', 'administrator/components/com_jofacebook/assets/js/facebookpost.js', ['version' => 'auto']);
-		// add styles
-		foreach ($this->styles as $style)
-		{
-			Html::_('stylesheet', $style, ['version' => 'auto']);
-		}
-		// add scripts
-		foreach ($this->scripts as $script)
-		{
-			Html::_('script', $script, ['version' => 'auto']);
-		}
+        // add styles
+        foreach ($this->styles as $style)
+        {
+            Html::_('stylesheet', $style, ['version' => 'auto']);
+        }
+        // add scripts
+        foreach ($this->scripts as $script)
+        {
+            Html::_('script', $script, ['version' => 'auto']);
+        }
         // Set the Custom JS script to view
         $this->getDocument()->getWebAssetManager()->addInlineScript("
             
@@ -239,25 +256,25 @@ class HtmlView extends BaseHtmlView
             fbInit(fbOptions.appid);/***[/JCBGUI$$$$]***/
             
         ");
-	}
+    }
 
-	/**
-	 * Escapes a value for output in a view script.
-	 *
-	 * @param   mixed  $var     The output to escape.
-	 * @param   bool   $shorten The switch to shorten.
-	 * @param   int    $length  The shorting length.
-	 *
-	 * @return  mixed  The escaped value.
-	 * @since   1.6
-	 */
-	public function escape($var, bool $shorten = false, int $length = 40)
-	{
-		if (!is_string($var))
-		{
-			return $var;
-		}
+    /**
+     * Escapes a value for output in a view script.
+     *
+     * @param   mixed  $var     The output to escape.
+     * @param   bool   $shorten The switch to shorten.
+     * @param   int    $length  The shorting length.
+     *
+     * @return  mixed  The escaped value.
+     * @since   1.6
+     */
+    public function escape($var, bool $shorten = false, int $length = 40)
+    {
+        if (!is_string($var))
+        {
+            return $var;
+        }
 
-		return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
-	}
+        return StringHelper::html($var, $this->_charset ?? 'UTF-8', $shorten, $length);
+    }
 }
