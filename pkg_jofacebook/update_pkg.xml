@@ -6,10 +6,10 @@
 		<element>pkg_jofacebook</element>
 		<type>package</type>
 		<client>site</client>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 		<infourl title="JOFacebook">https://github.com/JLTRY/jofacebook/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/JLTRY/jofacebook/releases/download/v1.0.1/pkg_jofacebook-1.0.1.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/JLTRY/jofacebook/releases/download/v1.0.2/pkg_jofacebook-1.0.2.zip</downloadurl>
 		</downloads>
 		<tags>
 			<tag>Stable</tag>
@@ -18,8 +18,8 @@
 		<maintainerurl>https://github.com/JLTRY/jofacebook</maintainerurl>
 		<php_minimum>8.0</php_minimum>
 		<targetplatform name="joomla" version="(4\.[01234]|5\.[01234]|6\.[0])"/>
-		<sha256>5D5D6D0BED4D30276486A5810E3F24FE10A8E559E2E8C220A0C9FEEE54BD4F51</sha256>
-		<sha384>2C631741D59C2A59821235A585C238BCA58E43B0E41F2FF44099D065BBD2EBF707D9C7554891F5B2F1106A4C73D40271</sha384>
-		<sha512>1E67D94895E08E6B641B348E0A81EB495E024F72491BC9AD0FD17A071322C52E3B13FDAD388B6BFD64A5F9C33D1CA511ED027213BCFC31BF9F54C9B08B61819D</sha512>
+		<sha256>89E87972E0AE3813726230EA97F1625A5685596A5B04A2AF98607244D0110CB8</sha256>
+		<sha384>439F930BD0DC59162DE024C322D2FF5B128836B01CD3F2F5FC8B57BAB2C81F36AB0121841BDFF617A83FF8774F06A5D2</sha384>
+		<sha512>963CB51A91F5B9E3753262AF0C4198A7C3BC244CFCF59A345481124DF9F026B03A6C4D8A571834F202A444A10AF0CB480A4B8547EE1C991974F547CCD7D8FA4D</sha512>
 	</update>
 </updates>
