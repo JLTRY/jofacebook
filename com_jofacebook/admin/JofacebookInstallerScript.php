@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.4
-    @build			27th October, 2025
+    @version		1.0.5
+    @build			23rd December, 2025
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		JofacebookInstallerScript.php
@@ -202,12 +202,6 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
         // Remove Asset Data.
         $this->removeAssetData();
 
-
-        // Remove component from action logs extensions table.
-        $this->removeActionLogsExtensions();
-
-        // Remove Post from action logs config table.
-        $this->removeActionLogConfig('com_jofacebook.post');
         // little notice as after service, in case of bad experience with component.
         echo '<div style="background-color: #fff;" class="alert alert-info">
         <h2>Did something go wrong? Are you disappointed?</h2>
@@ -288,7 +282,7 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
                 // typeAlias
                 'com_jofacebook.post',
                 // table
-                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
+                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JLTRY\Component\Jofacebook\Administrator\Table"}}',
                 // rules
                 '',
                 // fieldMappings
@@ -326,25 +320,6 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
             echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
                 <img src="components/com_jofacebook/assets/images/vdm-component.png"/>
                 </a></div>';
-
-            // Add component to the action logs extensions table.
-            $this->setActionLogsExtensions();
-
-            // Add Post to the action logs config table.
-            $this->setActionLogConfig(
-                // typeTitle
-                'POST',
-                // typeAlias
-                'com_jofacebook.post',
-                // idHolder
-                'id',
-                // titleHolder
-                'id',
-                // tableName
-                '#__jofacebook_post',
-                // textPrefix
-                'COM_JOFACEBOOK'
-            );
         }
 
         // do any updates needed
@@ -358,7 +333,7 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
                 // typeAlias
                 'com_jofacebook.post',
                 // table
-                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JCB\Component\Jofacebook\Administrator\Table"}}',
+                '{"special": {"dbtable": "#__jofacebook_post","key": "id","type": "PostTable","prefix": "JLTRY\Component\Jofacebook\Administrator\Table"}}',
                 // rules
                 '',
                 // fieldMappings
@@ -391,26 +366,7 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
             echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
                 <img src="components/com_jofacebook/assets/images/vdm-component.png"/>
                 </a>
-                <h3>Upgrade to Version 1.0.4 Was Successful! Let us know if anything is not working as expected.</h3></div>';
-
-            // Add/Update component in the action logs extensions table.
-            $this->setActionLogsExtensions();
-
-            // Add/Update Post in the action logs config table.
-            $this->setActionLogConfig(
-                // typeTitle
-                'POST',
-                // typeAlias
-                'com_jofacebook.post',
-                // idHolder
-                'id',
-                // titleHolder
-                'id',
-                // tableName
-                '#__jofacebook_post',
-                // textPrefix
-                'COM_JOFACEBOOK'
-            );
+                <h3>Upgrade to Version 1.0.5 Was Successful! Let us know if anything is not working as expected.</h3></div>';
         }
 
         // move CLI files
