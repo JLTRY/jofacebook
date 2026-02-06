@@ -46,15 +46,26 @@ class JOFbkPost extends CMSPlugin implements SubscriberInterface
         $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
 
         // Register custom item without json definition
-        $wa->registerScript('facebook-jssdk', "plugins/content/jofbkpost/src/Extension/facebook-jssdk.js", [], [], []);
+        $wa->registerScript('jofbkpost.facebook',                     // identifiant unique
+                        'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=' .$appid , // URL externe
+                        [
+                            'attributes' => [                      // attributs HTML
+                                'async'     => true,
+                                'defer'     => true,
+                                'crossorigin' => 'anonymous'
+                            ],
+                            'version'   => 'v2.6',                 // version du SDK (facultatif)
+                            'dependencies' => []                  // aucune dépendance externe
+                        ]
+                    );
         // And use it later
-        $wa->useScript('facebook-jssdk');
-        $wa->addInlineScript('window.fbAsyncInit = function() {
+        $wa->useScript('jofbkpost.facebook');
+        /*$wa->addInlineScript('window.fbAsyncInit = function() {
                 FB.init({
                   appId      : "'. $appid .'",
                   xfbml      : true,
                   version    : "v23.0"
-            });};', ['position' => 'after'], [], ['facebook-jssdk']);
+            });};', ['position' => 'after'], [], ['jofbkpost.facebook']);*/
     }
     
     function onPrepareRow(ContentPrepareEvent $event)
@@ -71,7 +82,7 @@ class JOFbkPost extends CMSPlugin implements SubscriberInterface
         // In Joomla 4 a generic Event is passed
         // In Joomla 5 a concrete ContentPrepareEvent is passed
         [$context, $article, $params, $page] = array_values($event->getArguments());
-        if ($context !== "com_content.article" && $context !== "com_content.featured") return;
+        if ($context !== "com_content.article" && $context !== "com_content.featured" && $context !== "com_content.category") return;
         if (strpos( $article->text, '{fbk' ) === false) {
             return true;
         }
@@ -131,7 +142,7 @@ class JOFbkPost extends CMSPlugin implements SubscriberInterface
                     }
                     $this->addScripts($appid);
                     $p_content = $this->fbkpost($matches[0][$i], $_result);
-                    $article->text = str_replace("{fbkpost " . $matches[1][$i] . "}", $p_content, $article->text);
+                    $article->text = str_replace($matches[0][$i], $p_content, $article->text);
                 }
             }
         }

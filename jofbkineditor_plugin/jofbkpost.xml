@@ -7,7 +7,7 @@
 	<license>GPL</license>
 	<authorEmail>Email</authorEmail>
 	<authorUrl>Your URL</authorUrl>
-	<version>1.0.1</version>
+	<version>1.0.3</version>
 	<description>PLG_EDITOR_JOFBKPOST_DESCRIPTION</description>
 	<namespace path="src">JLTRY\Plugin\EditorsXtd\JOFbkPost</namespace>
 	<scriptfile>install.jofbkpost.php</scriptfile>
