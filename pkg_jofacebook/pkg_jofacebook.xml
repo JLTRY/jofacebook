@@ -8,9 +8,9 @@
     <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPL</license>
     <author>JL TRYOEN</author>
     <authorEmail>jltryoen@orange.fr</authorEmail>
-    <authorUrl>https://github.com/JLTRY/plg_jofacebook</authorUrl>
+    <authorUrl>https://github.com/JLTRY/jofacebook</authorUrl>
     <packager>JL TRYOEN</packager>
-    <packagerurl>https://github.com/JLTRY/plg_jofacebook</packagerurl>
+    <packagerurl>https://github.com/JLTRY/jofacebook</packagerurl>
     <description>PKG_JOFACEBOOK_DESCRIPTION</description>
     <scriptfile>install.jofacebook.php</scriptfile>
     <files folder="packages">
