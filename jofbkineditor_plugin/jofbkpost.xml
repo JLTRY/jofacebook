@@ -5,8 +5,8 @@
 	<creationDate>August 11, 2025</creationDate>
 	<copyright>(c) JL TRYOEN, 2016-2025. All rights reserved.</copyright>
 	<license>GPL</license>
-	<authorEmail>Email</authorEmail>
-	<authorUrl>Your URL</authorUrl>
+	<authorEmail>jltryoen@orange.fr</authorEmail>
+	<authorUrl>http://joomla.jltryoen.fr</authorUrl>
 	<version>1.0.3</version>
 	<description>PLG_EDITOR_JOFBKPOST_DESCRIPTION</description>
 	<namespace path="src">JLTRY\Plugin\EditorsXtd\JOFbkPost</namespace>

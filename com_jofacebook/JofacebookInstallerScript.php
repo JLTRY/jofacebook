@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.5
-    @build			23rd December, 2025
+    @version		1.0.6
+    @build			30th May, 2026
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		JofacebookInstallerScript.php
@@ -366,7 +366,7 @@ class Com_JofacebookInstallerScript implements InstallerScriptInterface
             echo '<div style="background-color: #fff;" class="alert alert-info"><a target="_blank" href="http://www.jltryoen.fr" title="JOFacebook">
                 <img src="components/com_jofacebook/assets/images/vdm-component.png"/>
                 </a>
-                <h3>Upgrade to Version 1.0.5 Was Successful! Let us know if anything is not working as expected.</h3></div>';
+                <h3>Upgrade to Version 1.0.6 Was Successful! Let us know if anything is not working as expected.</h3></div>';
         }
 
         // move CLI files

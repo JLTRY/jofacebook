@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.5
-    @build			23rd December, 2025
+    @version		1.0.6
+    @build			30th May, 2026
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		default.php

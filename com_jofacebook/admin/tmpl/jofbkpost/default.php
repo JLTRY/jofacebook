@@ -3,8 +3,8 @@
                 JL Tryoen 
 /-------------------------------------------------------------------------------------------------------/
 
-    @version		1.0.5
-    @build			23rd December, 2025
+    @version		1.0.6
+    @build			30th May, 2026
     @created		12th August, 2025
     @package		JOFacebook
     @subpackage		default.php
@@ -65,10 +65,10 @@ Html::_('bootstrap.tooltip');
     <?php echo \Joomla\CMS\Layout\LayoutHelper::render('post.details_left', $this); ?>
 </div>
       <button type="button" class="btn btn-success" onclick="insertFacebookPost(jQuery, '<?php echo $this->editor ?>');">
-                            <?php echo Text::_('JOFBK_ADD_POST'); ?>
+                            <?php echo Text::_('COM_JOFACEBOOK_ADD_POST'); ?>
                          </button>
-     <button  type="button" onclick="showFacebookPost(jQuery);">
-                            <?php echo Text::_('JOFBK_VIEW_POST'); ?>
+     <button  type="button" class="btn btn-warning" onclick="showFacebookPost(jQuery);">
+                            <?php echo Text::_('COM_JOFACEBOOK_VIEW_POST'); ?>
                          </button>
     <div>
         <input type="hidden" name="task" value="post.edit" />
